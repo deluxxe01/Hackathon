@@ -1,9 +1,9 @@
 import React from 'react'
 
-function cadastro() {
+function Cadastro() {
   return (
-    <div>cadastro</div>
+    <div>Cadastro</div>
   )
 }
 
-export default cadastro
+export default Cadastro
