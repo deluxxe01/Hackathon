@@ -8,3 +8,11 @@ Exemplo de corpo para colocar em uma requisição
     "data_nascimento":"2000-10-12",
     "genero":"masculino"
 }
+
+///// payload de medidas do usuario
+{
+  "peso": 58,
+  "altura": 170,
+  "largura_abdomen": 30,
+  "id_usuario": "b533e977-96dc-4da2-82c2-937447e8b660"
+}

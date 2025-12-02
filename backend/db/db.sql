@@ -29,7 +29,7 @@ CREATE TABLE Missao (
     Tipo VARCHAR(50) NOT NULL, 
     Periodicidade VARCHAR(20) NOT NULL, 
     XP_Recompensa INTEGER NOT NULL,
-    ID_Admin INTEGER NOT NULL,
+    ID_Admin UUID NOT NULL,
     -- FK: Quem criou a missão
     CONSTRAINT fk_missao_admin FOREIGN KEY (ID_Admin) 
         REFERENCES Admin (ID_Admin)
