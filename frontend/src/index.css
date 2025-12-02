@@ -3,11 +3,15 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
   #root, body, html{
     height: 100vh;
     font-family: 'Luxurious Roman', serif, sans-serif;
     background-color: var(--branco);
   }
-  
-   
+  :root{
+    --roxo: #6738c4;
+    --roxo_fraco: #d6c1ff;
+    --rosa_fraco: #f2d8e9;
+    --rosa_forte: #f29bd4;
+    --branco: #fdfff5;
+  }

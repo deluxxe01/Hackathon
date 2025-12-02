@@ -1,0 +1,116 @@
+:root{
+    --roxo: #6C63FF;
+    --roxo_fraco: #d6c1ff;
+    --rosa_fraco: #f2d8e9;
+    --rosa_forte: #f29bd4;
+    --branco: #FFFFFF;
+  }
+.pagina-login{
+    background-color: var(--branco);
+    width: 40vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .titulo-form {
+    font-size: 6vh;
+    text-align: center;
+    color: #333;
+}
+.form-auth {
+    background-color: var(--branco);
+    padding: 1vh;
+    width: 30vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+.form-group{
+    display: flex;
+    width: 28vh;
+    flex-direction: column;
+    border-radius: 10vh;
+}
+.form-group {
+    position: relative;
+    border-radius: 10vh;
+}
+.botao-form {
+    background-color: var(--roxo);
+    color: var(--branco);
+    border: none;
+    border-radius: 10vh;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1vh;
+}
+.botao-form:hover {
+    background-color: var(--roxo_fraco);
+  }
+  .mensagem-form-erro {
+    margin-top: 1rem;
+    color: var(--vermelho);
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--cinza);
+}
+.auth-link a {
+    color: var(--verde);
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+.auth-link a:hover {
+    text-decoration: underline;
+} 
+.form-group.form-group-password input {
+    padding-right: 3.5rem; 
+    border-radius: 1vh;
+    height: 5vh;
+}
+.form-group.form-group-email input{
+    border-radius: 1vh;
+    height: 5vh;
+}
+.password-toggle-icon {
+    position: absolute;
+    top: 4.3vh; 
+    right: 1rem; 
+    transform: translateY(-50%); 
+    cursor: pointer;
+    color: var(--cinza);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } 
+  .password-toggle-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .password-toggle-icon:hover {
+    color: var(--preto);
+  } 
+  @media (max-width: 768px) {
+  }
+.container-login {
+justify-content: center;
+background: var(--branco); 
+padding: 1.5rem;
+}
+.form-container {
+    max-width: 100%;
+    box-shadow: none;
+    padding: 1rem;
+  }
+     

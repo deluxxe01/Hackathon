@@ -8,5 +8,4 @@ const router = createBrowserRouter([
     { path: "/Cadastro", element: <Cadastro/> },
     { path: "/Login", element: <Login/> },
 ]);
-
 export default router;

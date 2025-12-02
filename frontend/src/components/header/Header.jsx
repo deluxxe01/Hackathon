@@ -4,6 +4,8 @@ import "./Header.css";
 
 function Header() {
     const [usuarioLogado, setUsuarioLogado] = useState(null);
+    const [menuAberto, setMenuAberto] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,8 +17,18 @@ function Header() {
     const handleLogout = () => {
         localStorage.removeItem('usuarioLogado');
         setUsuarioLogado(null);
+        setMenuAberto(false);
         navigate('/'); 
     };
+    useEffect(() => {
+        const fecharMenu = (e) => {
+            if (!e.target.closest(".menu-usuario")) {
+                setMenuAberto(false);
+            }
+        };
+        document.addEventListener("click", fecharMenu);
+        return () => document.removeEventListener("click", fecharMenu);
+    }, []);
     return (
         <div className="container-header">
             <div className="logo">
@@ -27,35 +39,44 @@ function Header() {
             </div>
 
             <div className="header-links">
+
                 <Link className="texto-header" to="/">Home</Link>
-                
-            
-                {/* Link EXCLUSIVO para ADMINISTRADORES/FUNCIONÁRIOS */}
-                {/* Verifica se está logado E se isAdmin é verdadeiro */}
-                {usuarioLogado && usuarioLogado.isAdmin === true && (
-                    <Link className="texto-header" to="/funcionario">funcionario</Link>
+
+                {usuarioLogado && usuarioLogado.isAdmin && (
+                    <Link className="texto-header" to="/funcionario">funcionário</Link>
                 )}
+                 <div className="menu-usuario">
 
-                <div className="header-user-actions">
-                    
-                    {/* Ícone de Perfil */}
-                    <Link 
-                        className="header-icon-link" 
-                        to={usuarioLogado ? "/minhaconta" : "/Login"} 
-                        title={usuarioLogado ? "Minha Conta" : "Fazer Login"}
-                    >
-                        <img src="/icons/user.png" alt="Perfil" className="header-icon" />
-                    </Link>
+{/* Botão que abre o dropdown */}
+                <div 
+                 className="usuario-trigger"
+                 onClick={(e) => {
+                 e.stopPropagation();
+                 setMenuAberto(!menuAberto);
+                 }}>
 
-                    {/* Botão de Logout */}
-                    {usuarioLogado && (
-                        <button className="header-icon-link" onClick={handleLogout} title="Sair">
-                            <img src="/icons/sair.png" alt="Sair" className="header-icon" />
-                        </button>
-                    )}
-
+                <img src="icons/user.png" className="header-icon" alt="perfil" />
+                <span className="seta">▾</span>
                 </div>
-            </div>
+                
+                       {menuAberto && (
+                        <div className="dropdown-usuario">
+
+                            {!usuarioLogado ? (
+                                <>
+                                    <Link to="/Login" onClick={() => setMenuAberto(false)}>login</Link>
+                                    <Link to="/Registrar" onClick={() => setMenuAberto(false)}>Registrar</Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/minhaconta" onClick={() => setMenuAberto(false)}>Minha Conta</Link>
+                                    <button onClick={handleLogout}>Sair</button>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
+             </div>
         </div>
     );
 }
