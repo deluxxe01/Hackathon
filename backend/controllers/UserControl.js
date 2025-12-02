@@ -87,19 +87,23 @@ export default {
     },
      async createInfo(req,res){
 
-        const {peso,altura,largura_abdomen} = req.body
-
-        const id_usuario = req.params.id
+        const {peso,altura,largura_abdomen,id_usuario} = req.body
 
         const consulta = await MedidasModel.CreateInfos({id_usuario,peso,altura,largura_abdomen})
 
-        
+        return res.status(201).json(consulta)
 
-        
+    
+     },
+     async updateMedidas(req,res){
 
+        const {peso,altura,largura_abdomen}= req.body
 
+        const id_usuario = req.params.id
 
+        const consulta = await MedidasModel.updateMedidas({id_usuario,altura,peso,largura_abdomen})
 
+        return res.status(200).json(consulta)
 
      }
 }

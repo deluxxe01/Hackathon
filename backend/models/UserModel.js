@@ -50,7 +50,7 @@ class UserModel {
         return consulta.rows[0];
     }
 
-    static async deleteUserByEmail(email){
+    static async deleteUser(email){
 
         const client = await pool.connect()
 
