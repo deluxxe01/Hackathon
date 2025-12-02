@@ -10,3 +10,5 @@ router.post('/generate-token', (req, res) => {
   const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
   res.json({ token, secretKey });
 });
+
+export default router;

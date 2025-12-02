@@ -1,6 +1,7 @@
 import UserModel from "../models/UserModel.js";
-import bcrypt from "bcryptjs";
-import genToken from "../routes/jwtRoute.js";
+import bcrypt from "bcrypt";
+import genToken from "../util/jwtRoute.js";
+import MedidasModel from "../models/MedidasModel.js";
 
 export default {
     async CreateUser(req, res) {
@@ -25,6 +26,7 @@ export default {
         }
 
         const isPasswordValid = bcrypt.compareSync(senha, user.hashedPassword);
+        
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Senha incorreta" });
@@ -35,7 +37,31 @@ export default {
         return res.status(200).json({ user, token });
     },
 
+    async updateProfile(req, res) {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader) {
+            return res.status(401).json({ message: "Sem token de autorização" });
+        }
+
+        const token = authHeader.split(" ")[1];
+
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            const updateFields = req.body;
+
+            const updatedUser = await UserModel.updateProfile(decoded.email, updateFields);
+
+            return res.status(200).json(updatedUser);
+
+        } catch (err) {
+            return res.status(401).json({ message: "Token invalido" });
+        }
+    },
+
     async getProfile(req, res) {
+        
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {
@@ -59,4 +85,21 @@ export default {
             return res.status(401).json({ message: "Token invalido" });
         }
     },
+     async createInfo(req,res){
+
+        const {peso,altura,largura_abdomen} = req.body
+
+        const id_usuario = req.params.id
+
+        const consulta = await MedidasModel.CreateInfos({id_usuario,peso,altura,largura_abdomen})
+
+        
+
+        
+
+
+
+
+
+     }
 }

@@ -1,5 +1,4 @@
  import pool from "../db/db.js"
- import genToken from "../routes/jwtRoute.js"
 
 class UserModel {
 
@@ -22,6 +21,40 @@ class UserModel {
         const client = await pool.connect()
 
         const sql = "SELECT * FROM Usuarios WHERE email=$1"
+
+        const consulta = await client.query(sql,[email])
+
+        return consulta.rows[0]
+
+    }
+
+    static async updateProfile(email, updateFields) {
+        const client = await pool.connect();
+
+        const setClauses = [];
+        const values = [];
+        let index = 1;
+
+        for (const field in updateFields) {
+            setClauses.push(`${field} = $${index}`);
+            values.push(updateFields[field]);
+            index++;
+        }
+
+        values.push(email);
+
+        const sql = `UPDATE Usuarios SET ${setClauses.join(', ')} WHERE email = $${index} RETURNING id, nome, email, data_nascimento, genero, nivel_atual, xp_total, xp_mensal`;
+
+        const consulta = await client.query(sql, values);
+
+        return consulta.rows[0];
+    }
+
+    static async deleteUserByEmail(email){
+
+        const client = await pool.connect()
+
+        const sql = "DELETE FROM Usuarios WHERE email=$1 RETURNING id,nome,email"
 
         const consulta = await client.query(sql,[email])
 
