@@ -1,4 +1,5 @@
  import pool from "../db/db.js"
+ import genToken from "../routes/jwtRoute.js"
 
 class UserModel {
 
@@ -11,6 +12,18 @@ class UserModel {
         const consulta = await client.query(sql,[obj.nome,obj.email,obj.senha,obj.data_nascimento,obj.genero])
 
         console.log("log: ",consulta)
+
+        return consulta.rows[0]
+
+    }
+
+    static async getUserByEmail(email){
+
+        const client = await pool.connect()
+
+        const sql = "SELECT * FROM Usuarios WHERE email=$1"
+
+        const consulta = await client.query(sql,[email])
 
         return consulta.rows[0]
 
