@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "pg": "^8.16.3"
+  },
+  "scripts": {
+    "start": "nodemon ./server/server.js",
+    "dev":"nodemon ./server/server.js"
+  },
+  "type": "module"
+}

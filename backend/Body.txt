@@ -1,0 +1,10 @@
+Exemplo de corpo para colocar em uma requisição
+
+
+{
+    "nome":"userTest",
+    "emai"l:"Test@gmail.com",
+    "senha":"123",
+    "data_nascimento":"2000-10-12",
+    "genero":"masculino"
+}

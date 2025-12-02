@@ -1,10 +1,10 @@
 import express from "express"
-import rotas from "../routes/routes.js"
+import rotasUser from "../routes/userRoute.js"
 const App = express()
 
 App.use(express.json())
 
-App.use(rotas)
+App.use(rotasUser)
 
 App.listen(3000,()=>{
 
