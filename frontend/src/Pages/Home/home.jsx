@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
-// Simulação dos dados dos slides (Troque os caminhos das imagens pelos seus arquivos reais)
+// Dados dos slides baseados nas suas imagens
 const slides = [
   {
     id: 1,
-    image: "/logos/slide1.png", // Coloque a imagem da moça fazendo afundo
+    // Use uma imagem ilustrativa (SVG ou PNG sem fundo fica melhor)
+    image: "./img-vitta/meditacao_1.svg", // Ex: Moça alongando
     text: "Inspire-se. Cuide-se. Viva leve."
   },
   {
     id: 2,
-    image: "/logos/slide2.png", // Coloque a imagem do casal treinando
+    image: "./img-vitta/personal_trainer_homem.svg", // Ex: Casal treinando
     text: "Pequenas escolhas, grande bem-estar."
   },
   {
     id: 3,
-    image: "/logos/slide3.png", // Coloque a imagem da moça meditando
+    image: "./img-vitta/alongamento.svg", // Ex: Meditação
     text: "Hábitos saudáveis para uma vida leve."
   }
 ];
@@ -24,7 +25,6 @@ const slides = [
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Função para mudar o slide ao clicar nas bolinhas
   const handleDotClick = (index) => {
     setCurrentSlide(index);
   };
@@ -32,27 +32,32 @@ function Home() {
   return (
     <div className="home-container">
       
-      {/* Cabeçalho com Logo (Estilo Script) */}
+      {/* Cabeçalho */}
       <header className="home-header">
-        {/* Se você tiver a imagem do logo VittaLight, use a tag <img> aqui */}
-        <h1 className="logo-script">VittaLight</h1> 
+        <div className="logo-container">
+          {/* Ícone estilizado simulando o da imagem */}
+          <span className="logo-icon"><img src="./Logo.png" className="logo_P" alt="" /></span> 
+          <h1 className="logo-script">VittaLight</h1>
+        </div>
       </header>
 
-      {/* Conteúdo dinâmico do Slider */}
+      {/* Área Principal (Slider) */}
       <main className="home-main">
-        <div className="illustration-container">
-          <img 
-            src={slides[currentSlide].image} 
-            alt="Ilustração Fitness" 
-            className="slide-image"
-          />
+        <div className="slide-content fade-in">
+          <div className="illustration-container">
+            <img 
+              src={slides[currentSlide].image} 
+              alt="Ilustração Fitness" 
+              className="slide-image"
+            />
+          </div>
+
+          <p className="slide-text">
+            {slides[currentSlide].text}
+          </p>
         </div>
 
-        <p className="slide-text">
-          {slides[currentSlide].text}
-        </p>
-
-        {/* Paginação (Bolinhas) */}
+        {/* Paginação */}
         <div className="pagination-dots">
           {slides.map((_, index) => (
             <span 
@@ -64,7 +69,7 @@ function Home() {
         </div>
       </main>
 
-      {/* Botão de Ação */}
+      {/* Rodapé com Botão */}
       <footer className="home-footer">
         <Link to="/login" className="btn-entrar">
           Entrar
@@ -74,4 +79,5 @@ function Home() {
     </div>
   );
 }
+
 export default Home;

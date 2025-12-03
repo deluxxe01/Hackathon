@@ -1,114 +1,144 @@
+/* Importando fontes: Uma cursiva para o Logo e uma moderna para o texto */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
 
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* ======== CONTAINER ======== */
+/* Container Principal com o Gradiente */
 .home-container {
-  width: 100%;
-  min-height: 100vh;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-}
-
-/* ======== HEADER ======== */
-.home-header {
+  justify-content: space-between;
+  min-height: 100vh;
   width: 100%;
+  /* O gradiente roxo que desvanece para branco */
+  background: linear-gradient(180deg, #9F8BFF 0%, #ffffff 45%);
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  color: #555;
+}
+
+/* --- Cabeçalho e Logo --- */
+.home-header {
   text-align: center;
-  margin-top: 10px;
+  padding-top: 40px;
+  flex: 0 0 auto;
 }
 
-.logo {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: 1px;
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.logo span {
-  color: #00ff88;
+.logo_P {
+  width: 90px;
+  height: 70px;
 }
 
-/* ======== MAIN ======== */
+.logo-script {
+  font-family: 'Great Vibes', cursive; /* Fonte manuscrita */
+  font-size: 4rem;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* --- Conteúdo Principal (Slider) --- */
 .home-main {
-  margin-top: 30px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  width: 100%;
 }
 
-.home-title {
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1.3;
+.illustration-container {
+  margin-bottom: 30px;
+  height: 250px; /* Altura fixa para evitar pulos na tela */
+  display: flex;
+  align-items: flex-end; /* Alinha a imagem na base */
+  justify-content: center;
 }
 
-.home-subtitle {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #bbbbbb;
+.slide-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-/* ======== IMAGE ======== */
-.home-image {
+.slide-text {
+  font-size: 1.1rem;
+  color: #8c8c8c; /* Cinza suave */
+  max-width: 280px;
+  margin: 0 auto 30px auto;
+  line-height: 1.5;
+}
+
+/* Animação suave ao trocar slide */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Bolinhas de Paginação --- */
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #d1d1d1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #7B61FF; /* Roxo ativo */
+  transform: scale(1.2);
+}
+
+/* --- Rodapé e Botão --- */
+.home-footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 35px 0 25px 0;
+  padding-bottom: 30px;
 }
 
-.home-image img {
-  width: 80%;
-  max-width: 300px;
-  filter: drop-shadow(0 0 10px #00ff8855);
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/* ======== BUTTONS ======== */
-.button-area {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.btn-primary {
-  padding: 14px;
-  border-radius: 10px;
+.btn-entrar {
+  background-color: #6c5ce7; /* Cor base do botão */
+  background: linear-gradient(90deg, #7B61FF 0%, #6c5ce7 100%);
+  color: white;
   text-decoration: none;
-  color: #000;
-  background: #00ff88;
-  font-size: 18px;
-  font-weight: 700;
-  transition: .2s;
-}
-
-.btn-primary:hover {
-  opacity: .8;
-}
-
-.btn-secondary {
-  padding: 14px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: #fff;
-  border: 2px solid #00ff88;
-  font-size: 18px;
   font-weight: 600;
-  transition: .2s;
-}
-
-.btn-secondary:hover {
-  background: #00ff88;
-  color: #000;
-}
-
-/* ======== FOOTER ======== */
-.home-footer {
-  margin-top: 40px;
+  font-size: 1.2rem;
+  padding: 15px 0;
+  width: 90%; /* Botão largo como na imagem */
+  max-width: 350px;
+  border-radius: 50px; /* Bordas bem arredondadas */
   text-align: center;
-  font-size: 12px;
-  color: #777;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4); /* Sombra suave */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-entrar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
 }
