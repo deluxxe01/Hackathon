@@ -12,12 +12,72 @@ const MenuIcon = () => (
 );
 
 const UserIcon = () => (
-  <img src="./icons/user.png" className='icon-user' alt="" />
+  <img src="./icons/user-b.png" className='icon-user' alt="" />
 );
 
 const RulerIcon = () => (
   <img src="./icons/regua.png" className='icon-regua' alt="" />
 );
+
+const HomeRIcon = () => (
+  <img src="./icons/home-r.png" className='icon-burguer-r' alt="Home" />
+);
+const MedalRIcon = () => ( 
+  <img src="./icons/medalha-r.png" className='icon-burguer-r' alt="Medalha" />
+);
+const MissionRIcon = () => ( 
+  <img src="./icons/missao-r.png" className='icon-burguer-r' alt="Missão" />
+);
+const RankingRIcon = () => ( 
+  <img src="./icons/ranking-r.png" className='icon-burguer-r' alt="Ranking" />
+);
+const UserRIcon = () => (
+  <img src="./icons/user-r.png" className='icon-burguer-r' alt="User" />
+);
+
+function icons() {
+  const HomeBIcon = () => (
+    <img src="./icons/home-b.png" className='icon-home-b' alt="Home" />
+  );
+  
+  
+  // --- KG (Peso/Unidade) ---
+  const KgIcon = () => (
+    <img src="./icons/KG.png" className='icon-kg' alt="KG" />
+  );
+  
+  // --- Medalha (Medal) ---
+  const MedalIcon = () => ( // Versão B (Padrão)
+    <img src="./icons/medalha-b.png" className='icon-medalha-b' alt="Medalha" />
+  );
+  
+  
+  // --- Missão (Mission) ---
+  const MissionIcon = () => ( // Versão B (Padrão)
+    <img src="./icons/missao-b.png" className='icon-missao-b' alt="Missão" />
+  );
+  
+  
+  // --- Prancheta (Clipboard) ---
+  const ClipboardIcon = () => (
+    <img src="./icons/prancheta.png" className='icon-prancheta' alt="Prancheta" />
+  );
+  
+  // --- Ranking ---
+  const RankingIcon = () => ( // Versão B (Padrão)
+    <img src="./icons/ranking-b.png" className='icon-ranking-b' alt="Ranking" />
+  );
+  
+  
+  // --- Trena (Tape Measure) ---
+  const TapeIcon = () => (
+    <img src="./icons/trena.png" className='icon-trena' alt="Trena" />
+  );
+  
+  // --- User (Versão R) ---
+  // Nota: UserIcon (versão -b) já foi criado no seu exemplo.
+  
+}
 
 
 export default function Perfil() {
@@ -58,11 +118,11 @@ export default function Perfil() {
       <div className={`side-menu ${openMenu ? "open" : ""}`}>
         <h3 className="side-title">Menu</h3>
 
-        <button className="side-item" onClick={() => navigate('/')}>🏠 Home</button>
-        <button className="side-item" onClick={() => setOpenMenu(false)}>👤 Perfil</button>
-        <button className="side-item" onClick={() => navigate('/Conquista')}>🏆 Conquistas</button>
-        <button className="side-item" onClick={() => navigate('/Ranking')}>📊 Ranking</button>
-        <button className="side-item" onClick={() => navigate('/Missao')}>🎯 Missões</button>
+        <button className="side-item" onClick={() => navigate('/')}><HomeRIcon /> Home</button>
+        <button className="side-item" onClick={() => setOpenMenu(false)}><UserRIcon /> Perfil</button>
+        <button className="side-item" onClick={() => navigate('/Conquista')}><MedalRIcon /> Conquistas</button>
+        <button className="side-item" onClick={() => navigate('/Ranking')}>< RankingRIcon /> Ranking</button>
+        <button className="side-item" onClick={() => navigate('/Missao')}><MissionRIcon /> Missões</button>
       </div>
     </>
   );

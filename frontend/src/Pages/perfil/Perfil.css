@@ -54,6 +54,11 @@
   align-items: center;
 }
 
+.icon-burguer-r {
+  width: 30px;
+  height: 30px;
+}
+
 /* Menu Cards */
 .menu-cards {
   display: flex;
