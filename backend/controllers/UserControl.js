@@ -19,7 +19,7 @@ export default {
       genero,
     });
 
-    const payload = { id: consulta.id, email: consulta.email };
+        const token = genToken({ id: consulta.id, email: consulta.email });
 
     return res.status(201).json({ user: consulta, token });
   },
@@ -37,16 +37,17 @@ export default {
 
     const isPasswordValid = bcrypt.compareSync(senha, user.senha);
 
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Senha incorreta" });
-    }
-    const token = this.createToken({ id: user.id, email: user.email });
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Senha incorreta" });
+        }
+
+        const token = genToken({ id: user.id, email: user.email });
 
     return res.status(200).json({ user, token });
   },
 
-  async updateProfile(req, res) {
-    const authHeader = req.headers.authorization;
+    async updateProfile(req, res) {
+        const authHeader = req.headers.authorization;
 
     if (!authHeader) {
       return res.status(401).json({ message: "Sem token de autorização" });
@@ -105,89 +106,50 @@ export default {
         return res.status(404).json({ message: "Usuario não encontrado" });
       }
 
-      return res.status(200).json({
-        id: user.id,
-        nome: user.nome,
-        email: user.email,
-        data_nascimento: user.data_nascimento,
-        genero: user.genero,
-        nivel_atual: user.nivel_atual,
-        xp_total: user.xp_total,
-        xp_mensal: user.xp_mensal,
-      });
-    } catch (err) {
-      return res.status(401).json({ message: "Token invalido" });
+            return res.status(200).json({ id: user.id, nome: user.nome, email: user.email, data_nascimento: user.data_nascimento, genero: user.genero, nivel_atual: user.nivel_atual, xp_total: user.xp_total, xp_mensal: user.xp_mensal });
+
+        } catch (err) {
+            return res.status(401).json({ message: "Token invalido" });
+        }
+    },
+     async createInfo(req,res){
+
+        const {peso,altura,largura_abdomen,id_usuario} = req.body
+
+        const consulta = await MedidasModel.CreateInfos({id_usuario,peso,altura,largura_abdomen})
+
+        return res.status(201).json(consulta)
+
+    
+     },
+     async updateMedidas(req,res){
+
+        const {peso,altura,largura_abdomen}= req.body
+
+        const id_usuario = req.params.id
+
+        const consulta = await MedidasModel.updateMedidas({id_usuario,altura,peso,largura_abdomen})
+
+        return res.status(200).json(consulta)
+
+     },
+     async getMedidas(req,res){
+
+        const id = req.params.id
+
+        const consulta = await MedidasModel.getInfos(id)
+
+        return res.status(200).json(consulta)
+    },
+    async obtainXp(req,res){
+
+        const {xp} = req.body
+
+        const id = req.params.id
+
+        const consulta = await UserModel.getXp({xp,id})
+
+        return res.status(200).json(consulta)
+
     }
-  },
-  async createInfo(req, res) {
-    const { peso, altura, largura_abdomen, id_usuario } = req.body;
-
-    const consulta = await MedidasModel.CreateInfos({
-      id_usuario,
-      peso,
-      altura,
-      largura_abdomen,
-    });
-
-    return res.status(201).json(consulta);
-  },
-  async updateMedidas(req, res) {
-    const { peso, altura, largura_abdomen } = req.body;
-
-    const id_usuario = req.params.id;
-
-    const consulta = await MedidasModel.updateMedidas({
-      id_usuario,
-      altura,
-      peso,
-      largura_abdomen,
-    });
-
-    return res.status(200).json(consulta);
-  },
-  async getMedidas(req, res) {
-    const id = req.params.id;
-
-    const consulta = await MedidasModel.getInfos(id);
-
-    return res.status(200).json(consulta);
-  },
-  async obtainXp(req, res) {
-    const { xp } = req.body;
-
-    const id = req.params.id;
-
-    const consulta = await UserModel.getXp({ xp, id });
-
-    return res.status(200).json(consulta);
-  },
-
-  async createToken(req, res) {
-    const { payload } = req.body;
-    try {
-        const secretKey = crypto.randomBytes(64).toString("hex");
-        console.log("LOG DO TOKEN", token);
-        const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
-        return res.json({ token, secretKey });
-    } catch (error) {
-        console.error("Erro ao criar o token:", error);
-    }
-  },
-
-  async TokenVerify(req, res) {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader) {
-      return res.status(401).json({ message: "Sem token de autorização" });
-    }
-
-    const token = authHeader.split(" ")[1];
-
-    try {
-      const decoded = jwt.verify(token, secretKey);
-      return res.status(200).json({ valid: true, decoded });
-    } catch (error) {
-      return res.status(401).json({ valid: false, message: "Token inválido" });
-    }
-  },
-};
+}
