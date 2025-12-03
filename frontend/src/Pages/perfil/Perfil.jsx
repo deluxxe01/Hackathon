@@ -29,9 +29,9 @@ export default function Perfil() {
     email: 'maria@email.com',
     genero: 'Feminino',
     senha: '',
-    altura: '1.65',
-    peso: '60.0',
-    abdomen: '75.0'
+    altura: '0',
+    peso: '0',
+    abdomen: '0'
   });
 
   const handleChange = (e) => {

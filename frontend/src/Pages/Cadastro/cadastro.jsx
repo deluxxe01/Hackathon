@@ -96,7 +96,7 @@ function Cadastro() {
     } catch (erro) {
       setErro("❌ Erro ao conectar à API. Verifique o backend.");
       console.error("Erro ao criar usuário:", erro);
-      navigate('/Perfil');
+      
     }
   };
 
