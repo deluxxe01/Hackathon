@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Conquista.css';
 
+// Componente simples para o ícone de lista
+const MenuIcon = () => (
+  <img src="./icons/lista.png" className='icon-lista' alt="Menu" />
+);
+
 export default function Conquistas() {
   const navigate = useNavigate();
+  const [openMenu, setOpenMenu] = useState(false); // Estado do Menu Lateral
 
   // Mock: true = desbloqueada, false = bloqueada
   const badges = [
@@ -15,71 +21,55 @@ export default function Conquistas() {
     { id: 6, name: 'Lendário', desc: 'Top 1 no Ranking Mensal', icon: '👑', unlocked: false },
   ];
 
+  // Renderização do Menu Lateral (igual ao Perfil)
+  const renderSideMenu = () => (
+    <>
+      {/* Overlay escuro */}
+      <div 
+        className={`overlay ${openMenu ? "show" : ""}`} 
+        onClick={() => setOpenMenu(false)}
+      />
+
+      {/* Menu Lateral */}
+      <div className={`side-menu ${openMenu ? "open" : ""}`}>
+        <h3 className="side-title">Menu</h3>
+
+        <button className="side-item" onClick={() => navigate('/')}>🏠 Home</button>
+        <button className="side-item" onClick={() => navigate('/perfil')}>👤 Perfil</button>
+        <button className="side-item" onClick={() => {navigate('/conquista'); setOpenMenu(false);}}>🏆 Conquistas</button>
+        <button className="side-item" onClick={() => navigate('/ranking')}>📊 Ranking</button>
+        <button className="side-item" onClick={() => navigate('/missao')}>🎯 Missões</button>
+      </div>
+    </>
+  );
+
   return (
     <div className="badges-container">
+      
+      {/* Injeta o Menu Lateral na tela */}
+      {renderSideMenu()}
 
-      <h1 className="page-title">Suas <span>Conquistas</span></h1>
+      {/* Cabeçalho Estilizado com Botão de Menu */}
+      <header className="page-header">
+        <h1 className="page-title">Suas <span>Conquistas</span></h1>
+        
+        <button className="btn-icon" onClick={() => setOpenMenu(true)}>
+          <MenuIcon />
+        </button>
+      </header>
 
+      {/* Grid de Badges */}
       <div className="badges-grid">
         {badges.map(badge => (
           <div key={badge.id} className={`badge-card ${badge.unlocked ? 'unlocked' : 'locked'}`}>
             <div className="badge-icon">{badge.icon}</div>
             <div className="badge-name">{badge.name}</div>
-            <div className="badge-desc">{badge.unlocked ? badge.desc : '??? (Bloqueado)'}</div>
+            <div className="badge-desc">{badge.unlocked ? badge.desc : 'Bloqueado'}</div>
           </div>
         ))}
       </div>
 
-     <nav className="bottom-nav">
-
-    <div className="nav-item" onClick={() => navigate('/missao')}>
-        <span className="nav-icon">⚔️</span> Missões
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/ranking')}>
-        <span className="nav-icon">🏆</span> Ranking
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/conquista')}>
-        <span className="nav-icon">🏅</span> Badges
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/nivel')}>
-        <span className="nav-icon">📶</span> Níveis
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/rotina')}>
-        <span className="nav-icon">📅</span> Rotina
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/ligas')}>
-        <span className="nav-icon">🔥</span> Ligas
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/estatistica')}>
-        <span className="nav-icon">📊</span> Estatísticas
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/configuracao')}>
-        <span className="nav-icon">⚙️</span> Configurações
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/historico_missao')}>
-        <span className="nav-icon">📘</span> Histórico Missões
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/historico_treino')}>
-        <span className="nav-icon">🏋️</span> Histórico Treinos
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/progresso')}>
-        <span className="nav-icon">📈</span> Progresso
-    </div>
-
-    <div className="nav-item active">
-        <span className="nav-icon">👤</span> Perfil
-    </div>
-</nav>
+    
     </div>
   );
 }

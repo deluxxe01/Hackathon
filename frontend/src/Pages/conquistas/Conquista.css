@@ -1,40 +1,259 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        * { box-sizing: border-box; }
-        .badges-container {
-          background: #000; min-height: 100vh; color: #fff;
-          font-family: 'Inter', sans-serif; padding: 20px; padding-bottom: 80px;
-        }
 
-        .page-title { font-size: 28px; font-weight: 800; margin-bottom: 20px; text-align: center; }
-        .page-title span { color: #00ff88; }
 
-        .badges-grid {
-          display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
-        }
+.badges-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 100px;
+  position: relative;
+  overflow-x: hidden;
+}
 
-        .badge-card {
-          background: #111; border-radius: 16px; padding: 20px;
-          display: flex; flex-direction: column; align-items: center; text-align: center;
-          border: 1px solid #222; transition: 0.3s;
-        }
+/* --- Cabeçalho Ajustado --- */
+.page-header {
+  box-shadow: 0 4px 15px rgba(123, 97, 255, 0.3);
+  color: #9F8BFF;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-        /* Estilo Bloqueado */
-        .badge-card.locked { opacity: 0.4; filter: grayscale(100%); }
-        
-        /* Estilo Desbloqueado */
-        .badge-card.unlocked {
-          border-color: #00ff88; background: rgba(0, 255, 136, 0.03);
-        }
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
 
-        .badge-icon { font-size: 40px; margin-bottom: 10px; }
-        .badge-name { font-weight: 700; font-size: 14px; margin-bottom: 5px; }
-        .badge-desc { font-size: 11px; color: #888; }
+.page-title span {
+  font-weight: 300;
+  opacity: 0.9;
+}
 
-        .bottom-nav {
-          position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
-          background: #000; border-top: 1px solid #222;
-          display: flex; justify-content: space-around; align-items: center;
-        }
-        .nav-item { color: #666; text-align: center; font-size: 12px; cursor: pointer; }
-        .nav-item.active { color: #00ff88; }
-        .nav-icon { font-size: 24px; display: block; margin-bottom: 2px; }
+/* Botão do Menu no Header */
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-lista {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s;
+}
+
+.btn-icon:hover .icon-lista {
+  transform: scale(1.1);
+}
+
+/* --- Grid de Conquistas --- */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Card da Conquista --- */
+.badge-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 10px #5a4b8f;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.badge-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(123, 97, 255, 0.15);
+}
+
+.badge-card.unlocked {
+  border: 2px solid transparent;
+}
+
+.badge-card.locked {
+  background-color: #f0f0f0;
+  opacity: 0.7;
+  filter: grayscale(1);
+}
+
+.badge-card.locked .badge-icon {
+  background: #ddd;
+}
+
+.badge-icon {
+  font-size: 2.5rem;
+  background: #fdfdfd;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 10px rgba(123, 97, 255, 0.1);
+}
+
+.badge-card.unlocked .badge-icon {
+  background: linear-gradient(135deg, #e0d9ff 0%, #ffffff 100%);
+  color: #333;
+}
+
+.badge-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #5a4b8f;
+  margin-bottom: 5px;
+}
+
+.badge-desc {
+  font-size: 0.75rem;
+  color: #888;
+  line-height: 1.3;
+}
+
+/* --- Navegação Inferior --- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  z-index: 100;
+  scrollbar-width: none;
+}
+
+.bottom-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-item {
+  flex: 0 0 auto;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 5px;
+}
+
+.nav-item .nav-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+  transition: transform 0.2s;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: #7B61FF;
+}
+
+.nav-item:hover .nav-icon, .nav-item.active .nav-icon {
+  transform: translateY(-3px);
+}
+
+.nav-item.active {
+  font-weight: 600;
+}
+
+/* ============================= */
+/* MENU LATERAL (NOVO)     */
+/* ============================= */
+
+/* Overlay escuro */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 998;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Gaveta do Menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -270px; /* Escondido à direita */
+  width: 260px;
+  height: 100%;
+  background: #ffffff;
+  padding: 25px 20px;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.20);
+  transition: right 0.35s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.side-menu.open {
+  right: 0; /* Aparece na tela */
+}
+
+.side-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #6C5CE7;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.side-item {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s ease;
+  font-weight: 500;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.side-item:hover {
+  background-color: #e0e0e0;
+  transform: translateX(-5px);
+  color: #6C5CE7;
+}
