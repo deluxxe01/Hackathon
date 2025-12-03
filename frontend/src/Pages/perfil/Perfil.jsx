@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Barguer from "../../components/barguers/Barguer";
 import './Perfil.css';
+import { GlobalContext } from '../../context/GlobalContext';
+import { useContext } from 'react';
+import { useEffect } from 'react';
 
 // --- ÍCONES ESPECÍFICOS DO PERFIL ---
 // Removemos os ícones do menu (HomeRIcon, MedalRIcon, etc) pois agora vivem no Burguer.jsx
@@ -21,6 +24,7 @@ const RulerIcon = () => (
 export default function Perfil() {
   const navigate = useNavigate();
   const [view, setView] = useState('menu'); 
+  const {userOn,setUserOn} = useContext(GlobalContext)
   // O state 'openMenu' foi removido, pois o Burguer gerencia isso sozinho agora.
 
   // Simulação de dados do usuário
@@ -37,6 +41,9 @@ export default function Perfil() {
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+  useEffect(()=>{
+    console.log(userOn)
+  },[])
 
   const handleSave = () => {
     alert("Alterações salvas com sucesso!");
@@ -77,10 +84,10 @@ export default function Perfil() {
       </header>
 
       <div className="form-container">
-        <input className="input-field" name="nome" placeholder="Nome Completo" value={userData.nome} onChange={handleChange} />
-        <input className="input-field" name="email" placeholder="Email" value={userData.email} onChange={handleChange} />
-        <input className="input-field" name="genero" placeholder="Gênero" value={userData.genero} onChange={handleChange} />
-        <input className="input-field" name="senha" type="password" placeholder="Senha" value={userData.senha} onChange={handleChange} />
+        <input className="input-field" name="nome" placeholder="Nome Completo" value={userOn.nome} onChange={handleChange} />
+        <input className="input-field" name="email" placeholder="Email" value={userOn.email} onChange={handleChange} />
+        <input className="input-field" name="genero" placeholder="Gênero" value={userOn.genero} onChange={handleChange} />
+        <input className="input-field" name="senha" type="password" placeholder="Senha" value={userOn.senha} onChange={handleChange} />
 
         <div className="action-buttons">
           <button className="btn-edit">Editar dados</button>

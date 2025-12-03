@@ -16,9 +16,11 @@ export default {
     },
 
     async loginAdm(req, res) {
+
         const { email, senha } = req.body;
 
         const adm = await admModel.getAdmByEmail(email);
+        
 
         if (!adm) {
             return res.status(404).json({ message: "Administrador não encontrado" });

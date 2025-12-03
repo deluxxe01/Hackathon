@@ -16,13 +16,12 @@ export default {
 
         const consulta = await UserModel.createUser({ nome, email, hashedPassword, data_nascimento, genero });
 
-        
-        console.log('LOG DO TOKEN',token)
 
-        return res.status(201).json({ user: consulta, token });
+        return res.status(201).json(consulta);
     },
 
     async loginUser(req, res) {
+
         const { email, senha } = req.body;
 
         const user = await UserModel.getUserByEmail(email);
@@ -32,6 +31,9 @@ export default {
 
             
         }
+
+        console.log("dados: ",email)
+        console.log("senha: ",senha)
        
         const isPasswordValid = bcrypt.compareSync(senha, user.senha);
         
@@ -41,11 +43,11 @@ export default {
         }
 
 
-        return res.status(200).json({ user, token });
+        return res.status(200).json(user);
     },
 
     async updateProfile(req, res) {
-        
+
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {
@@ -69,18 +71,9 @@ export default {
     },
 
     async getProfile(req, res) {
-        
-        const authHeader = req.headers.authorization;
-
-        if (!authHeader) {
-            return res.status(401).json({ message: "Sem token de autorizacao" });
-        }
-
-        const token = authHeader.split(" ")[1];
-
+    
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+            
             const user = await UserModel.getUserByEmail(decoded.email);
 
             if (!user) {
@@ -105,7 +98,7 @@ export default {
      },
      async updateMedidas(req,res){
 
-        const {peso,altura,largura_abdomen}= req.body
+        const {peso,altura,largura_abdomen} = req.body
 
         const id_usuario = req.params.id
 
