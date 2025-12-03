@@ -19,9 +19,9 @@ export default {
       genero,
     });
 
-        const token = genToken({ id: consulta.id, email: consulta.email });
+        
 
-    return res.status(201).json({ user: consulta, token });
+    return res.status(201).json(consulta);
   },
 
   async loginUser(req, res) {
