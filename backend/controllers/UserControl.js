@@ -18,6 +18,7 @@ export default {
 
         const token = genToken({ id: consulta.id, email: consulta.email });
 
+
         return res.status(201).json({ user: consulta, token });
     },
 
@@ -131,5 +132,34 @@ export default {
 
         return res.status(200).json(consulta)
 
+    },
+
+    async deleteUser(req, res) {
+        const { email } = req.body;
+
+        const deletedUser = await UserModel.deleteUser(email);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: "Usuario não encontrado" });
+        }
+
+        return res.status(200).json({ message: "Usuario deletado com sucesso" });
+    },
+
+    async verifyToken(req, res) {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader) {
+            return res.status(401).json({ message: "Sem token de autorização" });
+        }
+
+        const token = authHeader.split(" ")[1];
+
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            return res.status(200).json({ valid: true, decoded });
+        } catch (err) {
+            return res.status(401).json({ message: "Token invalido" });
+        }
     }
 }

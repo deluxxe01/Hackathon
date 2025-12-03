@@ -1,7 +1,7 @@
-import {router} from 'express';
-import admControl from '../controllers/admControl';
+import {Router} from 'express';
+import admControl from '../controllers/admControl.js';
 
-const admRoutes = router();
+const admRoutes = Router();
 admRoutes.post('/adm', admControl.CreateAdm);
 admRoutes.post('/adm/login', admControl.loginAdm);
 admRoutes.delete('/adm', admControl.deleteAdm);
