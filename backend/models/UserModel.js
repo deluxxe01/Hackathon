@@ -6,7 +6,7 @@ class UserModel {
 
         const client = await pool.connect()
          
-        const sql = "INSERT INTO Usuarios (nome,email,senha,data_nascimento,genero) VALUES($1,$2,$3,$4,$5) RETURNING nome,email,senha,data_nascimento,genero,nivel_atual,xp_total,xp_mensal "
+        const sql = "INSERT INTO Usuarios (nome,email,senha,data_nascimento,genero) VALUES($1,$2,$3,$4,$5) RETURNING id_usuario,nome,email,senha,data_nascimento,genero,nivel_atual,xp_total,xp_mensal "
 
         console.log("parametro da função: ",obj)
 

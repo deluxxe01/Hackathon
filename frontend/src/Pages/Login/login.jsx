@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
+import { useContext } from 'react';
 
 function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
+  const {userOn,setUserOn} = useContext(GlobalContext)
   const [formData, setFormData] = useState({
     email: '',
     senha: ''
   });
+  useEffect(()=>(
+    console.log("user: ",formData)
+
+  ),[formData])
+
 
   const handleChange = (e) => {
     setFormData({
@@ -21,27 +30,17 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    
     try {
       // Ajuste a URL conforme sua API
-      const response = await fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || 'Erro ao fazer login.');
-        setLoading(false);
-        return;
-      }
-
-      localStorage.setItem('usuario', JSON.stringify(data.user));
+     
       // alert('Login realizado com sucesso!'); // Opcional
+      
+      const res = await axios.post("http://localhost:3000/user/login",formData)
+      
+      console.log("Usuario: ", res)
+      setUserOn(res.data)
+
       navigate('/perfil');
 
     } catch (error) {

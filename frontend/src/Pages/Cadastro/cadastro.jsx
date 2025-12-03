@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Cadastro.css';
 import axios from 'axios';
+import { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
@@ -16,6 +18,7 @@ function Cadastro() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const {userOn,setUserOn} = useContext(GlobalContext)
 
   const [formData, setFormData] = useState({
     nome: '',
@@ -92,6 +95,8 @@ function Cadastro() {
     try {
       const resposta = await axios.post("http://localhost:3000/user", payload);
       console.log("Usuário criado:", resposta.data);
+      setUserOn(resposta.data)
+
       navigate('/Perfil');
     } catch (erro) {
       setErro("❌ Erro ao conectar à API. Verifique o backend.");
