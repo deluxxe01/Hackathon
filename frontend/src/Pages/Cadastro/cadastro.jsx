@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Cadastro.css';
+import axios from 'axios';
 
 function Cadastro() {
   const navigate = useNavigate();
 
-  function irpraraPerfil() {
-    navigate('/Perfil');
-  }
-
   const [step, setStep] = useState(1);
+  const [erro, setErro] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -25,28 +23,80 @@ function Cadastro() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErro("");
   };
 
-  const nextStep = () => setStep(step + 1);
+  const validarPasso1 = () => {
+    if (!formData.nome.trim()) {
+      setErro("⚠️ Preencha seu nome.");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setErro("⚠️ Preencha seu email.");
+      return false;
+    }
+    return true;
+  };
+
+  const validarPasso2 = () => {
+    if (!formData.data_nascimento.trim()) {
+      setErro("⚠️ Informe sua data de nascimento.");
+      return false;
+    }
+    if (!formData.genero.trim()) {
+      setErro("⚠️ Selecione seu gênero.");
+      return false;
+    }
+    return true;
+  };
+
+  const validarPasso3 = () => {
+    if (!formData.senha.trim()) {
+      setErro("⚠️ A senha não pode ficar vazia.");
+      return false;
+    }
+    if (!formData.confirmar_senha.trim()) {
+      setErro("⚠️ Confirme sua senha.");
+      return false;
+    }
+    if (formData.senha !== formData.confirmar_senha) {
+      setErro("⚠️ As senhas não coincidem.");
+      return false;
+    }
+    return true;
+  };
+
+  const nextStep = () => {
+    if (step === 1 && !validarPasso1()) return;
+    if (step === 2 && !validarPasso2()) return;
+    setErro("");
+    setStep(step + 1);
+  };
+
   const prevStep = () => setStep(step - 1);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const criarUsuario = async () => {
+    const payload = {
+      nome: formData.nome,
+      email: formData.email,
+      senha: formData.senha,
+      data_nascimento: formData.data_nascimento,
+      genero: formData.genero,
+    };
 
-    if (formData.senha !== formData.confirmar_senha) {
-      alert("As senhas não coincidem!");
-      return;
+    try {
+      const resposta = await axios.post("http://localhost:3000/user", payload);
+      console.log("Usuário criado:", resposta.data);
+      navigate('/Perfil');
+    } catch (erro) {
+      setErro("❌ Erro ao conectar à API. Verifique o backend.");
+      console.error("Erro ao criar usuário:", erro);
+      navigate('/Perfil');
     }
-
-    console.log("Dados enviados:", formData);
-    alert("Cadastro concluído!");
-    navigate('/login');
   };
 
   return (
     <div className="cadastro-container">
-
-      {/* HEADER */}
       <header className="header">
         {step > 1 && (
           <button type="button" className="btn-back" onClick={prevStep}>←</button>
@@ -54,12 +104,13 @@ function Cadastro() {
         <h2>Criar Conta</h2>
       </header>
 
-      {/* FORM */}
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form">
 
-        {/* === PASSO 1 === */}
+        {/* PASSO 1 */}
         {step === 1 && (
           <div className="fade">
+
+            {erro && <p className="erro-msg">{erro}</p>}
 
             <div className="input-group">
               <label>Nome Completo</label>
@@ -67,7 +118,6 @@ function Cadastro() {
                 name="nome"
                 value={formData.nome}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -78,7 +128,6 @@ function Cadastro() {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -94,9 +143,11 @@ function Cadastro() {
           </div>
         )}
 
-        {/* === PASSO 2 === */}
+        {/* PASSO 2 */}
         {step === 2 && (
           <div className="fade">
+
+            {erro && <p className="erro-msg">{erro}</p>}
 
             <div className="input-group">
               <label>Data Nascimento</label>
@@ -105,7 +156,6 @@ function Cadastro() {
                 type="date"
                 value={formData.data_nascimento}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -115,7 +165,6 @@ function Cadastro() {
                 name="genero"
                 value={formData.genero}
                 onChange={handleChange}
-                required
               >
                 <option value="" disabled>Selecione</option>
                 <option value="Masculino">Masculino</option>
@@ -136,41 +185,58 @@ function Cadastro() {
           </div>
         )}
 
-        {/* === PASSO 3 === */}
+        {/* PASSO 3 */}
         {step === 3 && (
           <div className="fade">
 
+            {erro && <p className="erro-msg">{erro}</p>}
+
+            {/* SENHA */}
             <div className="input-group password-group">
-            <label>Senha</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              name="senha"
-              value={formData.senha}
-              onChange={handleChange}
-              required
-            />
-            <span
-              className={`password-icon ${showPassword ? "open" : ""}`}
-              onClick={() => setShowPassword(!showPassword)}
-            ></span>
-          </div>
+              <label>Senha</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="senha"
+                value={formData.senha}
+                onChange={handleChange}
+              />
 
-          <div className="input-group password-group">
-            <label>Confirmar Senha</label>
-            <input
-              type={showConfirm ? "text" : "password"}
-              name="confirmar_senha"
-              value={formData.confirmar_senha}
-              onChange={handleChange}
-              required
-            />
-            <span
-              className={`password-icon ${showConfirm ? "open" : ""}`}
-              onClick={() => setShowConfirm(!showConfirm)}
-            ></span>
-          </div>
+              {/* icone do olho */}
+              <img
+                src={showPassword ?"../icons/icon_olho_aberto.png" : "../icons/icon_olho_fechado.png"}  // 👉 coloque o src da imagem AQUI
+                alt="Mostrar senha"
+                className="eye-icon"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
 
-            <button type="submit" className="btn-next" onClick={irpraraPerfil}>
+            {/* CONFIRMAR SENHA */}
+            <div className="input-group password-group">
+              <label>Confirmar Senha</label>
+              <input
+                type={showConfirm ? "text" : "password"}
+                name="confirmar_senha"
+                value={formData.confirmar_senha}
+                onChange={handleChange}
+              />
+
+              {/* icone do olho */}
+              <img
+                src={showConfirm ? "../icons/icon_olho_aberto.png" : "../icons/icon_olho_fechado.png"} // 👉 coloque o src da imagem AQUI
+                alt="Mostrar senha"
+                className="eye-icon"
+                onClick={() => setShowConfirm(!showConfirm)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn-next"
+              onClick={(e) => {
+                e.preventDefault();
+                if (validarPasso3()) criarUsuario();
+              }}
+            >
               Cadastrar
             </button>
 
@@ -184,9 +250,9 @@ function Cadastro() {
 
       </form>
 
-      {/* IMAGEM */}
       <div className="footer-img">
         <img src="/img-vitta/biking.svg" alt="Ciclista" />
+      
       </div>
 
     </div>
