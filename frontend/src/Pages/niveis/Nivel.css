@@ -1,0 +1,62 @@
+.level-container {
+  background: #000;
+  min-height: 100vh;
+  padding: 26px;
+  color: #fff;
+}
+
+.level-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.level-box {
+  background: #111;
+  border: 1px solid #222;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.level-number {
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+
+.level-title-sub {
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.xp-bar {
+  width: 100%;
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 16px;
+}
+
+.xp-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #89ff70);
+  transition: width .4s;
+}
+
+.xp-info {
+  margin-top: 16px;
+  color: #aaa;
+}
+
+.btn-voltar {
+  width: 100%;
+  margin-top: 40px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}

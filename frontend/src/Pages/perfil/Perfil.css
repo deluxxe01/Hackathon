@@ -1,0 +1,121 @@
+.perfil-container {
+      min-height: 100vh;
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+    .perfil-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .fade-in { animation: fadeIn 0.3s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Headers */
+    .perfil-header-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding: 10px;
+    }
+    .perfil-header-back {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 15px;
+    }
+    .title { color: #6C5CE7; font-size: 2rem; font-weight: bold; margin: 0; }
+    .subtitle { color: #6C5CE7; font-size: 1.6rem; font-weight: bold; margin: 0; }
+    .btn-icon { background: none; border: none; cursor: pointer; }
+    .btn-back { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+
+    /* Menu Cards */
+    .menu-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+    .menu-card {
+      width: 100%;
+      max-width: 280px;
+      height: 180px;
+      background: linear-gradient(135deg, #FF6B6B 0%, #6C5CE7 100%);
+      border-radius: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+      transition: transform 0.2s;
+    }
+    .menu-card:active { transform: scale(0.98); }
+    .card-icon { margin-bottom: 15px; }
+    .menu-card h3 { font-size: 1.1rem; font-weight: bold; margin: 0; }
+
+    /* Forms */
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .input-field {
+      width: 100%;
+      padding: 18px;
+      background-color: #f0f0f0;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      color: #555;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .input-field:focus { border-color: #6C5CE7; background-color: #fff; }
+
+    /* Buttons */
+    .action-buttons {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .btn-edit {
+      background-color: #6C5CE7;
+      color: white;
+      padding: 16px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+    }
+    .btn-save {
+      background-color: #FF6B8B;
+      color: white;
+      padding: 16px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 107, 139, 0.4);
+    }
+
+    .icon-user {
+      width: 60px;
+      height: 60px;
+    }
+    .icon-regua {
+      width: 60px;
+      height: 60px;
+    }

@@ -1,0 +1,163 @@
+/* ===== CONTAINER ===== */
+.missao-container {
+  background: #000;
+  min-height: 100vh;
+  padding: 32px 22px 120px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TÍTULOS ===== */
+.missao-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.missao-desc {
+  text-align: center;
+  color: #b8b8b8;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+/* ===== LISTA ===== */
+.missao-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.missao-card {
+  background: linear-gradient(145deg, #0b0b0b, #121212);
+  border: 1px solid #1f1f1f;
+  padding: 20px;
+  border-radius: 18px;
+  transition: 0.25s ease;
+}
+
+.missao-card:hover {
+  transform: scale(1.02);
+  border-color: #333;
+}
+
+/* ===== CONCLUÍDA ===== */
+.missao-card.done {
+  border-color: #00ff99;
+  background: linear-gradient(145deg, #0e1f17, #0f2b20);
+  box-shadow: 0 0 10px rgba(0, 255, 140, 0.25);
+}
+
+.missao-card.done .progress-fill {
+  background: #00ff99 !important;
+}
+
+/* ===== HEADER ===== */
+.missao-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.missao-titulo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.missao-recompensa {
+  background: #fff;
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* ===== DESCRIÇÃO ITEM ===== */
+.missao-desc-item {
+  margin: 10px 0 14px;
+  color: #ccc;
+  font-size: 15px;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #1f1f1f;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #5b8dff;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #bbb;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-voltar {
+  background: #fff;
+  color: #000;
+  padding: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  margin-top: 32px;
+}
+
+.btn-voltar:active {
+  transform: scale(0.96);
+}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #222;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 14px;
+  color: #949494;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav-item:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.nav-item.active {
+  color: #fff;
+  font-weight: bold;
+  transform: scale(1.1);
+}
+
+.nav-icon {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 4px;
+}

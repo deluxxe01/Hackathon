@@ -1,0 +1,66 @@
+.stats-container {
+  background: #000;
+  min-height: 100vh;
+  padding: 26px;
+  color: #fff;
+}
+
+.stats-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #111;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #222;
+  margin-bottom: 20px;
+}
+
+.peso-line {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  background: #222;
+  border-radius: 12px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #4CAF50;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.xp-bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 200px;
+}
+
+.bar-wrapper {
+  text-align: center;
+}
+
+.bar {
+  width: 22px;
+  background: linear-gradient(180deg, #3399ff, #66c0ff);
+  border-radius: 6px;
+}
+
+.btn-voltar {
+  width: 100%;
+  margin-top: 40px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -1,0 +1,81 @@
+/* Container geral */
+.historico-container {
+  padding: 20px;
+  padding-bottom: 90px; 
+  font-family: "Poppins", sans-serif;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Título */
+.historico-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* Lista */
+.historico-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Card de histórico */
+.historico-item {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.historico-item h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.hist-date {
+  font-size: 13px;
+  color: gray;
+}
+
+.hist-xp {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+/* ---------------- Bottom Navigation ---------------- */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 2px solid #ddd;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.nav-icon {
+  font-size: 20px;
+  display: block;
+}
+
+.nav-item.active {
+  color: #2ecc71;
+  font-weight: bold;
+}

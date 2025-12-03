@@ -1,96 +1,112 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; 
 import './Login.css';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+
 function Login() {
-    
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [mensagem, setMensagem] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: '',
+    senha: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      setMensagem('');
+    e.preventDefault();
+    setLoading(true);
 
-      if (!email || !senha) {
-          setMensagem('Por favor, preencha o email e a senha.');
-          return;
+    try {
+      // Ajuste a URL conforme sua API
+      const response = await fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || 'Erro ao fazer login.');
+        setLoading(false);
+        return;
       }
 
-      try {
-          const response = await fetch('http://localhost:3001/api/user', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email, senha }),
-          });
+      localStorage.setItem('usuario', JSON.stringify(data.user));
+      // alert('Login realizado com sucesso!'); // Opcional
+      navigate('/perfil');
 
-          const data = await response.json();
-
-          if (response.ok) {
-         
-              localStorage.setItem('usuarioLogado', JSON.stringify(data));
-              navigate('/perfil');
-          } else {
-              setMensagem(data.error || 'Falha no login. Verifique suas credenciais.');
-          }
-      } catch (err) {
-          console.error('Erro de conexão:', err);
-          setMensagem('Erro ao conectar com o servidor. Tente novamente.');
-      }
+    } catch (error) {
+      console.error('Erro de conexão:', error);
+      alert('Erro ao conectar com o servidor.');
+    } finally {
+      setLoading(false);
+    }
   };
-  return (
-    <div className='pagina-login'>
-        <h1 className='titulo-form'>Login</h1>
-        <div className='form-container'>
-            <form className='form-auth' onSubmit={handleSubmit}>
-                <div className='form-group form-group-email'>
-                    <p htmlFor="email">Email:</p>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="Seu email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                 <div className='form-group form-group-password'>
-                    <p htmlFor="senha">Senha:</p>
-                    <input 
-                        // Muda o tipo baseado no estado 'showPassword'
-                        type={showPassword ? "text" : "password"} 
-                        id="senha" 
-                        placeholder="Sua senha"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                        required
-                    />
-                    {/* Ícone que muda ao clicar */}
-                    <span 
-                        className="password-toggle-icon"
-                        onClick={() => setShowPassword(!showPassword)}
-                    >
-                        {showPassword ? <FiEyeOff /> : <FiEye />}
-                    </span>
-                </div>
-                <button className='botao-form' type="submit">Entrar</button>
-            </form>
-            
-            {mensagem && (
-                <p className="mensagem-form-erro">
-                    {mensagem}
-                </p>
-            )}
 
-            {/* Link para a página de Cadastro */}
-            <p className="auth-link">
-                Não tem uma conta?{' '}
-                <Link to="/cadastro">Cadastre-se</Link>
-            </p>
-        </div>
-</div>
-); 
+  return (
+    <div className="login-page">
+      
+      {/* Área Superior (Branca) */}
+      <div className="login-content">
+        <h2 className="login-title">Entrar Login</h2>
+
+        <form className="login-form" onSubmit={handleSubmit}>
+          
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="login-input"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="senha">Senha</label>
+            <input
+              id="senha"
+              name="senha"
+              type="password"
+              className="login-input"
+              value={formData.senha}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button className="login-btn" disabled={loading}>
+            {loading ? 'Carregando...' : 'Logar'}
+          </button>
+        </form>
+
+        <p className="signup-text">
+          Não tem uma conta?{' '}
+          <span onClick={() => navigate('/cadastro')} className="signup-link">
+            Crie uma aqui
+          </span>
+        </p>
+      </div>
+
+      {/* Área Inferior (Ilustração e Fundo Roxo) */}
+      <div className="login-footer-illustration">
+        {/* Coloque a imagem do casal correndo aqui */}
+        <img src="/img-vitta/dupla_fit.svg" alt="Pessoas correndo" />
+      </div>
+
+    </div>
+  );
 }
 export default Login;

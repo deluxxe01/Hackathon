@@ -1,0 +1,110 @@
+.progresso-container {
+  padding: 20px;
+  padding-bottom: 90px;
+  background: #f5f5f5;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* CARD DE NÍVEL */
+.card-nivel {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nivel-numero {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Barra de XP */
+.barra-xp {
+  width: 100%;
+  height: 14px;
+  background: #ddd;
+  border-radius: 10px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.barra-xp-fill {
+  height: 100%;
+  background: #2ecc71;
+  border-radius: 10px;
+  transition: width 0.4s ease-in-out;
+}
+
+.xp-info {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* METRICAS */
+.subtitulo {
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.metricas-box {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.metrica {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.metrica-label {
+  color: #555;
+}
+
+/* ---------------- Bottom Navigation ---------------- */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 2px solid #ddd;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.nav-icon {
+  font-size: 20px;
+  display: block;
+}
+
+.nav-item.active {
+  color: #2ecc71;
+  font-weight: bold;
+}
