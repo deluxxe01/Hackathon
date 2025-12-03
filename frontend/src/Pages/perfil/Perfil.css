@@ -238,3 +238,16 @@
   background-color: #e4e4e4;
   transform: translateX(5px);
 }
+.containerh_h1_med_pessoais{
+
+display: flex;
+justify-content: center;
+width: 100%;
+}
+
+.container_h1_dados_pessoais{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+}

@@ -80,7 +80,10 @@ export default function Perfil() {
     <div className="perfil-content fade-in">
       <header className="perfil-header-back">
         <button onClick={() => setView('menu')} className="btn-back"><ArrowLeft /></button>
+        <div className='container_h1_dados_pessoais'>
+
         <h2 className="subtitle">Dados Pessoais</h2>
+        </div>
       </header>
 
       <div className="form-container">
@@ -101,12 +104,19 @@ export default function Perfil() {
     <div className="perfil-content fade-in">
       <header className="perfil-header-back">
         <button onClick={() => setView('menu')} className="btn-back"><ArrowLeft /></button>
+        
+        <div className='containerh_h1_med_pessoais'>
+
         <h2 className="subtitle">Medidas Pessoais</h2>
+        </div>
       </header>
 
       <div className="form-container">
+          <label htmlFor="">altura:</label>
         <input className="input-field" name="altura" placeholder="Altura" value={userData.altura} onChange={handleChange} />
+        <label htmlFor="">peso</label>
         <input className="input-field" name="peso" placeholder="Peso" value={userData.peso} onChange={handleChange} />
+        <label htmlFor="">largura do abdômen</label>
         <input className="input-field" name="abdomen" placeholder="Largura do abdômen" value={userData.abdomen} onChange={handleChange} />
 
         <div className="action-buttons">
@@ -116,6 +126,29 @@ export default function Perfil() {
       </div>
     </div>
   );
+
+
+
+  
+  // const criarUsuario = async () => {
+  //   const payload = {
+  //     nome: formData.nome,
+  //     email: formData.email,
+  //     senha: formData.senha,
+  //     data_nascimento: formData.data_nascimento,
+  //     genero: formData.genero,
+  //   };
+
+  //   try {
+  //     const resposta = await axios.post("http://localhost:3000/user", payload);
+  //     console.log("Usuário criado:", resposta.data);
+  //     navigate('/Perfil');
+  //   } catch (erro) {
+  //     setErro("❌ Erro ao conectar à API. Verifique o backend.");
+  //     console.error("Erro ao criar usuário:", erro);
+  //     navigate('/Perfil');
+  //   }
+  // };
 
   return (
     <div className="perfil-container">
