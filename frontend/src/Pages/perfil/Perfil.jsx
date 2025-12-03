@@ -6,19 +6,24 @@ import './Perfil.css';
 const ArrowLeft = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
 );
+
 const MenuIcon = () => (
-  <img src="./icons/menu.png" className='icon-menu' alt="" />
+  <img src="./icons/lista.png" className='icon-lista' alt="" />
 );
+
 const UserIcon = () => (
   <img src="./icons/user.png" className='icon-user' alt="" />
 );
+
 const RulerIcon = () => (
- <img src="./icons/regua.png" className='icon-regua' alt="" />
+  <img src="./icons/regua.png" className='icon-regua' alt="" />
 );
+
 
 export default function Perfil() {
   const navigate = useNavigate();
-  const [view, setView] = useState('menu'); // 'menu', 'dados', 'medidas'
+  const [view, setView] = useState('menu'); 
+  const [openMenu, setOpenMenu] = useState(false); // <<< MENU LATERAL
 
   // Simulação de dados do usuário
   const [userData, setUserData] = useState({
@@ -40,37 +45,55 @@ export default function Perfil() {
     setView('menu');
   };
 
-  // --- RENDERIZAÇÃO DAS TELAS ---
+  // MENU LATERAL (Hambúrguer)
+  const renderSideMenu = () => (
+    <>
+      {/* Overlay escuro */}
+      <div 
+        className={`overlay ${openMenu ? "show" : ""}`} 
+        onClick={() => setOpenMenu(false)}
+      />
 
-  // 1. TELA PRINCIPAL (MENU)
+      {/* Menu Lateral */}
+      <div className={`side-menu ${openMenu ? "open" : ""}`}>
+        <h3 className="side-title">Menu</h3>
+
+        <button className="side-item" onClick={() => navigate('/')}>🏠 Home</button>
+        <button className="side-item" onClick={() => setOpenMenu(false)}>👤 Perfil</button>
+        <button className="side-item" onClick={() => navigate('/Conquista')}>🏆 Conquistas</button>
+        <button className="side-item" onClick={() => navigate('/Ranking')}>📊 Ranking</button>
+        <button className="side-item" onClick={() => navigate('/Missao')}>🎯 Missões</button>
+      </div>
+    </>
+  );
+
+  // --- TELAS ---
   const renderMenu = () => (
     <div className="perfil-content fade-in">
+      
       <header className="perfil-header-menu">
         <h2 className="title">Perfil</h2>
-        <button className="btn-icon"><MenuIcon /></button>
+
+        {/* BOTÃO ABRE MENU */}
+        <button className="btn-icon" onClick={() => setOpenMenu(true)}>
+          <MenuIcon />
+        </button>
       </header>
 
       <div className="menu-cards">
-        {/* Card Dados Pessoais */}
         <div className="menu-card" onClick={() => setView('dados')}>
-          <div className="card-icon">
-            <UserIcon />
-          </div>
+          <div className="card-icon"><UserIcon /></div>
           <h3>Dados Pessoais</h3>
         </div>
 
-        {/* Card Medidas */}
         <div className="menu-card" onClick={() => setView('medidas')}>
-          <div className="card-icon">
-            <RulerIcon />
-          </div>
+          <div className="card-icon"><RulerIcon /></div>
           <h3>Medidas pessoais</h3>
         </div>
       </div>
     </div>
   );
 
-  // 2. TELA DADOS PESSOAIS
   const renderDados = () => (
     <div className="perfil-content fade-in">
       <header className="perfil-header-back">
@@ -92,7 +115,6 @@ export default function Perfil() {
     </div>
   );
 
-  // 3. TELA MEDIDAS
   const renderMedidas = () => (
     <div className="perfil-content fade-in">
       <header className="perfil-header-back">
@@ -116,7 +138,9 @@ export default function Perfil() {
 
   return (
     <div className="perfil-container">
-      
+
+      {renderSideMenu()}
+
       {view === 'menu' && renderMenu()}
       {view === 'dados' && renderDados()}
       {view === 'medidas' && renderMedidas()}
