@@ -12,7 +12,7 @@ class UserModel {
 
         const consulta = await client.query(sql,[obj.nome,obj.email,obj.hashedPassword,obj.data_nascimento,obj.genero])
 
-        console.log("log: ",consulta)
+       
 
         return consulta.rows[0]
 
