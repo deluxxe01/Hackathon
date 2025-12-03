@@ -1,66 +1,256 @@
-.stats-container {
-  background: #000;
-  min-height: 100vh;
-  padding: 26px;
-  color: #fff;
-}
 
-.stats-title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 20px;
-}
+    .dashboard-container {
+      min-height: 100vh;
+      background-color: #F4F6F8; /* Cinza bem clarinho pro fundo */
+      font-family: 'Segoe UI', sans-serif;
+      padding-bottom: 80px; /* Espaço pro menu inferior se tiver */
+    }
 
-.card {
-  background: #111;
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid #222;
-  margin-bottom: 20px;
-}
+    /* HEADER FIXO */
+    .top-bar {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+    }
+    .app-logo {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.8rem;
+      color: #6C5CE7;
+      margin: 0;
+    }
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      background-color: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #666;
+      cursor: pointer;
+    }
 
-.peso-line {
-  position: relative;
-  width: 100%;
-  height: 160px;
-  background: #222;
-  border-radius: 12px;
-}
+    /* SCROLL CONTENT */
+    .scroll-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  background: #4CAF50;
-  border-radius: 50%;
-  position: absolute;
-  transform: translateX(-50%);
-}
+    /* LEVEL CARD */
+    .level-card {
+      background: linear-gradient(135deg, #6C5CE7 0%, #a29bfe 100%);
+      border-radius: 20px;
+      padding: 20px;
+      color: white;
+      box-shadow: 0 10px 25px rgba(108, 92, 231, 0.3);
+    }
+    .level-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    .level-badge {
+      background-color: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .level-title {
+      margin: 5px 0 0 0;
+      font-size: 1.5rem;
+    }
+    .streak-badge {
+      background-color: rgba(255,255,255,0.9);
+      color: #333;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    .xp-container {
+      margin-top: 10px;
+    }
+    .xp-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+      opacity: 0.9;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #00cec9; /* Verde-azulado neon para contraste */
+      border-radius: 4px;
+    }
 
-.xp-bars {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  height: 200px;
-}
+    /* SEÇÕES GERAIS */
+    .section-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5px;
+    }
+    .section-header h3 {
+      margin: 0;
+      color: #333;
+      font-size: 1.1rem;
+    }
 
-.bar-wrapper {
-  text-align: center;
-}
+    /* ROTINA (Horizontal) */
+    .routine-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px; /* Para scrollbar não colar */
+    }
+    .routine-card {
+      min-width: 100px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border: 1px solid transparent;
+      transition: transform 0.2s;
+    }
+    .routine-card:active { transform: scale(0.95); }
+    
+    .routine-card.done { border-color: #00cec9; background-color: #e0fbfb; }
+    .routine-card.missed { border-color: #ff7675; opacity: 0.7; }
+    .routine-card.pending { border-color: #e0e0e0; }
 
-.bar {
-  width: 22px;
-  background: linear-gradient(180deg, #3399ff, #66c0ff);
-  border-radius: 6px;
-}
+    .day-label { font-weight: bold; font-size: 0.9rem; color: #555; }
+    .workout-label { font-size: 0.75rem; color: #777; text-align: center; }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .done .status-dot { background-color: #00cec9; }
+    .missed .status-dot { background-color: #ff7675; }
+    .pending .status-dot { background-color: #dcdcdc; }
 
-.btn-voltar {
-  width: 100%;
-  margin-top: 40px;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  background: #fff;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-}
+    /* MISSÕES */
+    .missions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mission-item {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mission-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mission-title { font-size: 0.95rem; color: #333; }
+    .mission-title.completed { text-decoration: line-through; color: #aaa; }
+    .mission-xp { 
+      font-size: 0.8rem; 
+      color: #6C5CE7; 
+      font-weight: bold; 
+      background: #eee; 
+      padding: 2px 8px; 
+      border-radius: 10px; 
+    }
+    .mini-progress-bg {
+      width: 100%;
+      height: 6px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+    }
+    .mini-progress-fill {
+      height: 100%;
+      background-color: #6C5CE7;
+      border-radius: 3px;
+    }
+
+    /* CONQUISTAS (Grid) */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .ach-card {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .ach-card.locked { opacity: 0.6; filter: grayscale(100%); }
+    .ach-icon { color: #FF9F43; }
+    .ach-title { font-size: 0.9rem; font-weight: 500; color: #444; }
+
+    /* RANKING */
+    .ranking-item {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .ranking-item.user-rank {
+      border: 2px solid #6C5CE7;
+      background-color: #f8f7ff;
+    }
+    .rank-pos { width: 30px; font-weight: bold; color: #6C5CE7; }
+    .rank-avatar { 
+      width: 35px; height: 35px; 
+      border-radius: 50%; 
+      background-color: #eee; 
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; margin-right: 12px;
+    }
+    .rank-avatar.me { background-color: #6C5CE7; color: white; }
+    .rank-name { flex: 1; font-size: 0.95rem; }
+    .rank-pts { font-weight: bold; font-size: 0.9rem; color: #555; }
+
+    /* ANIMAÇÕES */
+    .fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
