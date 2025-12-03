@@ -1,34 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import Barguer from "../../components/barguers/Barguer"; // Importação do componente
 import "./Ranking.css";
 
 export default function Ranking() {
   const navigate = useNavigate();
-  // Estado para controlar se o menu está aberto ou fechado
-  const [openMenu, setOpenMenu] = useState(false);
+  // Estado 'openMenu' e ícones locais removidos.
 
-  // --- Ícones (Definidos internamente conforme seu exemplo) ---
-  const MenuIcon = () => (
-    <img src="./icons/lista.png" className='icon-menu-main' alt="Menu" />
-  );
-  
-  const HomeRIcon = () => (
-    <img src="./icons/home-r.png" className='icon-burguer-r' alt="Home" />
-  );
-  const MedalRIcon = () => ( 
-    <img src="./icons/medalha-r.png" className='icon-burguer-r' alt="Medalha" />
-  );
-  const MissionRIcon = () => ( 
-    <img src="./icons/missao-r.png" className='icon-burguer-r' alt="Missão" />
-  );
-  const RankingRIcon = () => ( 
-    <img src="./icons/ranking-r.png" className='icon-burguer-r' alt="Ranking" />
-  );
-  const UserRIcon = () => (
-    <img src="./icons/user-r.png" className='icon-burguer-r' alt="User" />
-  );
-
-  // --- Dados do Ranking (Adicionei os emojis que faltavam) ---
+  // --- Dados do Ranking ---
   const ranking = [
     { pos: 1, nome: "Lucas Silva", pontos: 1280},
     { pos: 2, nome: "Mariana Souza", pontos: 1120},
@@ -40,38 +19,10 @@ export default function Ranking() {
   return (
     <div className="ranking-container">
 
-      {/* Cabeçalho com Botão de Menu */}
+      {/* Cabeçalho com o Componente Barguer */}
       <div className="header-top">
-        <button className="btn-menu-toggle" onClick={() => setOpenMenu(true)}>
-            <MenuIcon />
-        </button>
-      </div>
-
-      {/* --- MENU LATERAL (SIDEBAR) --- */}
-      {/* Overlay escuro para fechar ao clicar fora */}
-      <div className={`menu-overlay ${openMenu ? "open" : ""}`} onClick={() => setOpenMenu(false)} />
-      
-      <div className={`side-menu ${openMenu ? "open" : ""}`}>
-        <div className="side-header">
-            <h3 className="side-title">Menu</h3>
-            <button className="btn-close" onClick={() => setOpenMenu(false)}>×</button>
-        </div>
-
-        <button className="side-item" onClick={() => navigate('/')}>
-            <HomeRIcon /> <span>Home</span>
-        </button>
-        <button className="side-item" onClick={() => {navigate('/perfil'); setOpenMenu(false)}}>
-            <UserRIcon /> <span>Perfil</span>
-        </button>
-        <button className="side-item" onClick={() => navigate('/conquista')}>
-            <MedalRIcon /> <span>Conquistas</span>
-        </button>
-        <button className="side-item active" onClick={() => setOpenMenu(false)}>
-            <RankingRIcon /> <span>Ranking</span>
-        </button>
-        <button className="side-item" onClick={() => navigate('/missao')}>
-            <MissionRIcon /> <span>Missões</span>
-        </button>
+        {/* O componente já contém o botão e o menu lateral */}
+        <Barguer />
       </div>
 
       {/* --- CONTEÚDO DO RANKING --- */}
@@ -88,6 +39,7 @@ export default function Ranking() {
 
             <div className="rank-info">
               <span className="rank-name">
+                {/* Nota: Seus dados não tinham a chave 'emoji', mantive a lógica original */}
                 {p.emoji} {p.nome}
               </span>
               <span className="rank-points">{p.pontos} pts</span>

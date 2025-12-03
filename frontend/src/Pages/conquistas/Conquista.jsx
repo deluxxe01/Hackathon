@@ -1,22 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Não é mais necessário aqui se só era usado no menu
+import Barguer from "../../components/barguers/Barguer";
 import './Conquista.css';
 
 export default function Conquistas() {
-  const navigate = useNavigate();
-  const [openMenu, setOpenMenu] = useState(false);
-
-  // --- Ícones Personalizados (.png) ---
-  const MenuIcon = () => (
-    <img src="./icons/lista.png" className='icon-lista' alt="Menu" />
-  );
-  
-  // Ícones do Menu Lateral
-  const HomeRIcon = () => <img src="./icons/home-r.png" className='icon-side' alt="Home" />;
-  const MedalRIcon = () => <img src="./icons/medalha-r.png" className='icon-side' alt="Medalha" />;
-  const MissionRIcon = () => <img src="./icons/missao-r.png" className='icon-side' alt="Missão" />;
-  const RankingRIcon = () => <img src="./icons/ranking-r.png" className='icon-side' alt="Ranking" />;
-  const UserRIcon = () => <img src="./icons/user-r.png" className='icon-side' alt="User" />;
+  // Nota: Se você não tiver outros botões de navegação nesta tela, 
+  // pode até remover o 'useNavigate' deste arquivo.
 
   // --- Dados dos Badges (Mock) ---
   const badges = [
@@ -31,45 +20,13 @@ export default function Conquistas() {
   return (
     <div className="badges-container">
       
-      {/* --- MENU LATERAL (SIDEBAR) --- */}
-      {/* Overlay */}
-      <div 
-        className={`overlay ${openMenu ? "show" : ""}`} 
-        onClick={() => setOpenMenu(false)}
-      />
-
-      {/* Gaveta do Menu */}
-      <div className={`side-menu ${openMenu ? "open" : ""}`}>
-        <h3 className="side-title">Menu</h3>
-
-        <button className="side-item" onClick={() => navigate('/')}>
-            <HomeRIcon /> Home
-        </button>
-        <button className="side-item" onClick={() => {navigate('/perfil'); setOpenMenu(false)}}>
-            <UserRIcon /> Perfil
-        </button>
-        <button className="side-item" onClick={() => {navigate('/conquista'); setOpenMenu(false)}}>
-            <MedalRIcon /> Conquistas
-        </button>
-        <button className="side-item" onClick={() => navigate('/ranking')}>
-            <RankingRIcon /> Ranking
-        </button>
-        <button className="side-item" onClick={() => navigate('/missao')}>
-            <MissionRIcon /> Missões
-        </button>
-      </div>
-
-
       {/* --- CABEÇALHO (Header) --- */}
       <header className="page-header">
         <h1 className="page-title">Suas <span>Conquistas</span></h1>
         
-        {/* Botão que abre o menu */}
-        <button className="btn-icon" onClick={() => setOpenMenu(true)}>
-          <MenuIcon />
-        </button>
+        {/* Componente Burguer substitui o botão antigo e o menu lateral */}
+        <Barguer />
       </header>
-
 
       {/* --- GRID DE BADGES --- */}
       <div className="badges-grid">

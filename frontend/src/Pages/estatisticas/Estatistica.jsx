@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Trophy, Flame, Calendar, Activity, 
-  Target, Award, Users, ChevronRight, 
-  TrendingUp, Droplets, Zap, Medal
-} from 'lucide-react';
+// 1. IMPORTANDO O BARGUER E OS ÍCONES BRANCOS
+import Barguer, { IconsBranca } from "../../components/barguers/Barguer";
+// 2. IMPORTANDO O CSS
+import './Estatistica.css';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -18,28 +17,13 @@ export default function Dashboard() {
     streak: 12 // dias seguidos
   };
 
-  const weekRoutine = [
-    { day: 'Seg', workout: 'Peito + Tríceps', status: 'done' },
-    { day: 'Ter', workout: 'Costas + Bíceps', status: 'done' },
-    { day: 'Qua', workout: 'Pernas', status: 'missed' },
-    { day: 'Qui', workout: 'Abdômen', status: 'pending' },
-    { day: 'Sex', workout: 'Cardio', status: 'pending' },
-  ];
-
   const missions = [
     { title: 'Treinar 20 minutos', progress: 100, total: 100, xp: 50, done: true },
     { title: 'Beber 2L de água', progress: 1.5, total: 2, xp: 20, done: false },
     { title: 'Manter sequência', progress: 2, total: 3, xp: 100, done: false },
   ];
 
-  const achievements = [
-    { icon: <Zap />, title: 'Primeiros Passos', unlocked: true },
-    { icon: <Droplets />, title: 'Hidratado', unlocked: true },
-    { icon: <Flame />, title: 'Máquina', unlocked: false },
-    { icon: <Award />, title: 'Lendário', unlocked: false },
-  ];
-
-  // --- COMPONENTES VISUAIS ---
+  // --- COMPONENTES VISUAIS INTERNOS ---
 
   // 1. Header do Nível (Estilo Cartão Roxo)
   const LevelCard = () => (
@@ -50,7 +34,8 @@ export default function Dashboard() {
           <h2 className="level-title">{userLevel.title}</h2>
         </div>
         <div className="streak-badge">
-          <Flame size={18} fill="#FF9F43" stroke="none" />
+          {/* Emoji de fogo para o streak */}
+          <span role="img" aria-label="fogo">🔥</span>
           <span>{userLevel.streak} dias</span>
         </div>
       </div>
@@ -70,31 +55,15 @@ export default function Dashboard() {
     </div>
   );
 
-  // 2. Rotina Semanal (Horizontal Scroll)
-  const RoutineSection = () => (
-    <section className="section-container fade-in delay-1">
-      <div className="section-header">
-        <h3>Rotina da Semana</h3>
-        <Calendar size={20} color="#6C5CE7" />
-      </div>
-      <div className="routine-list">
-        {weekRoutine.map((item, index) => (
-          <div key={index} className={`routine-card ${item.status}`}>
-            <span className="day-label">{item.day}</span>
-            <div className="status-dot"></div>
-            <span className="workout-label">{item.workout}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-
-  // 3. Missões (Lista Vertical)
+  // 2. Missões (Lista Vertical)
   const MissionsSection = () => (
     <section className="section-container fade-in delay-2">
       <div className="section-header">
         <h3>Missões Diárias</h3>
-        <Target size={20} color="#6C5CE7" />
+        {/* Usando IconsBranca.Mission (Alvo/Missão) */}
+        <div className="section-icon-wrapper">
+            <IconsBranca.Mission />
+        </div>
       </div>
       <div className="missions-list">
         {missions.map((mission, index) => (
@@ -117,30 +86,15 @@ export default function Dashboard() {
     </section>
   );
 
-  // 4. Conquistas (Grid)
-  const AchievementsSection = () => (
-    <section className="section-container fade-in delay-3">
-      <div className="section-header">
-        <h3>Conquistas</h3>
-        <Trophy size={20} color="#6C5CE7" />
-      </div>
-      <div className="achievements-grid">
-        {achievements.map((ach, index) => (
-          <div key={index} className={`ach-card ${ach.unlocked ? 'unlocked' : 'locked'}`}>
-            <div className="ach-icon">{ach.icon}</div>
-            <span className="ach-title">{ach.title}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-
-  // 5. Ranking (Simples)
+  // 3. Ranking (Simples)
   const RankingPreview = () => (
     <section className="section-container fade-in delay-3">
       <div className="section-header">
         <h3>Ranking Global</h3>
-        <Users size={20} color="#6C5CE7" />
+        {/* Usando IconsBranca.Ranking (Pódio) */}
+        <div className="section-icon-wrapper">
+            <IconsBranca.Ranking />
+        </div>
       </div>
       <div className="ranking-item top-1">
         <span className="rank-pos">1</span>
@@ -157,36 +111,30 @@ export default function Dashboard() {
     </section>
   );
 
-
-
   return (
     <div className="dashboard-container">
-      <style>{styles}</style>
-
-      {/* HEADER */}
+      
+      {/* HEADER com Barguer */}
       <div className="top-bar">
+        <Barguer />
+        
         <h1 className="app-logo">VittaLight</h1>
-        <div className="profile-pic" onClick={() => navigate('/perfil')}>EU</div>
+        
+        <div className="profile-pic-placeholder" onClick={() => navigate('/perfil')}>
+          EU
+        </div>
       </div>
 
       {/* CONTEÚDO ROLÁVEL */}
       <div className="scroll-content">
-        
-        {/* Nível e XP */}
         <LevelCard />
-
-        {/* Rotina Semanal */}
-        <RoutineSection />
-
+        
         {/* Missões */}
         <MissionsSection />
-
+        
         {/* Ranking */}
         <RankingPreview />
-
-        {/* Conquistas */}
-        <AchievementsSection />
-
+        
       </div>
     </div>
   );
