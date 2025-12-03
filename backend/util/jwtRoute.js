@@ -3,6 +3,6 @@ import UserControl from '../controllers/UserControl.js';
 
 const genJwt = Router();
 
-genJwt.post('/generate-token', UserControl.createToken);
+genJwt.post('/generate-token', UserCgontrol.createToken);
 
 export default genJwt;
