@@ -11,7 +11,7 @@ export default function Dashboard() {
   // --- DADOS MOCKADOS (Simulação) ---
   const userLevel = {
     current: 7,
-    title: 'Guerreiro',
+    title: 'Guilherme',
     xpCurrent: 520,
     xpNext: 700,
     streak: 12 // dias seguidos
@@ -59,7 +59,7 @@ export default function Dashboard() {
   const MissionsSection = () => (
     <section className="section-container fade-in delay-2">
       <div className="section-header">
-        <h3>Missões Diárias</h3>
+        <h3>Missões Concluidas</h3>
         {/* Usando IconsBranca.Mission (Alvo/Missão) */}
         <div className="section-icon-wrapper">
             <IconsBranca.Mission />
