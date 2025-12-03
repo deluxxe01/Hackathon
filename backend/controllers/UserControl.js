@@ -16,7 +16,8 @@ export default {
 
         const consulta = await UserModel.createUser({ nome, email, hashedPassword, data_nascimento, genero });
 
-        const token = genToken({ id: consulta.id, email: consulta.email });
+        
+        console.log('LOG DO TOKEN',token)
 
         return res.status(201).json({ user: consulta, token });
     },
@@ -39,12 +40,12 @@ export default {
             return res.status(401).json({ message: "Senha incorreta" });
         }
 
-        const token = genToken({ id: user.id, email: user.email });
 
         return res.status(200).json({ user, token });
     },
 
     async updateProfile(req, res) {
+        
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {
@@ -131,5 +132,22 @@ export default {
 
         return res.status(200).json(consulta)
 
+    },
+
+    async verifyToken(req, res) {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader) {
+            return res.status(401).json({ message: "Sem token de autorização"})
+        }
+        
+        const token = authHeader.split(" ")[1];
+
+        try {
+            const decode = jwt.verify(token, process.env.JWT_SECRET)
+            return res.status(200).json({ valid:true, decode })
+        } catch(err) {
+            return res.status(401).json({ message: "token invalido"})
+        }
     }
 }

@@ -1,14 +1,15 @@
 import jwt from 'jsonwebtoken';
-import express from 'express';
+import { Router } from 'express';
 import cryto from 'crypto';
 
-const router = express.Router();
+const getToken = Router();
 
-router.post('/generate-token', (req, res) => {
+getToken.post('/generate-token', (req, res) => {
   const { payload } = req.body;
   const secretKey = cryto.randomBytes(64).toString('hex');
+  console.log('LOG DO TOKEN',token)
   const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-  res.json({ token, secretKey });
+  return res.json({ token, secretKey });
 });
 
-export default router;
+export default getToken;

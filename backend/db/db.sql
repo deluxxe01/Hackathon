@@ -8,6 +8,7 @@ CREATE TABLE Admin (
     Senha VARCHAR(255) NOT NULL
 );
 
+
 -- 2. Tabela de Usuários (O Jogador)
 CREATE TABLE Usuarios (
     ID_Usuario UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
