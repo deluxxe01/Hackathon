@@ -1,15 +1,8 @@
-import jwt from 'jsonwebtoken';
 import { Router } from 'express';
-import cryto from 'crypto';
+import UserControl from '../controllers/UserControl.js';
 
-const getToken = Router();
+const genJwt = Router();
 
-getToken.post('/generate-token', (req, res) => {
-  const { payload } = req.body;
-  const secretKey = cryto.randomBytes(64).toString('hex');
-  console.log('LOG DO TOKEN',token)
-  const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-  return res.json({ token, secretKey });
-});
+genJwt.post('/generate-token', UserCgontrol.createToken);
 
-export default getToken;
+export default genJwt;

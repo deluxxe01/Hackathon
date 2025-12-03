@@ -1,30 +1,39 @@
 import UserModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
-import genToken from "../util/jwtRoute.js";
 import MedidasModel from "../models/MedidasModel.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 export default {
+  async CreateUser(req, res) {
+    const { nome, email, senha, data_nascimento, genero } = req.body;
 
-    async CreateUser(req, res) {
+    const salt = bcrypt.genSaltSync(10);
 
-        const { nome, email, senha, data_nascimento, genero } = req.body;
+    const hashedPassword = bcrypt.hashSync(senha, salt);
 
-        const salt = bcrypt.genSaltSync(10);
+    const consulta = await UserModel.createUser({
+      nome,
+      email,
+      hashedPassword,
+      data_nascimento,
+      genero,
+    });
 
-        const hashedPassword = bcrypt.hashSync(senha, salt);
+        const token = genToken({ id: consulta.id, email: consulta.email });
 
-        const consulta = await UserModel.createUser({ nome, email, hashedPassword, data_nascimento, genero });
+    return res.status(201).json({ user: consulta, token });
+  },
 
+  async loginUser(req, res) {
+    const { email, senha } = req.body;
 
-        return res.status(201).json(consulta);
-    },
+    const user = await UserModel.getUserByEmail(email);
 
-    async loginUser(req, res) {
+    if (!user) {
+      return res.status(404).json({ message: "Usuario não encontrado" });
 
-        const { email, senha } = req.body;
-
-        const user = await UserModel.getUserByEmail(email);
+      //
+    }
 
         if (!user) {
             return res.status(404).json({ message: "Usuario não encontrado" });
@@ -42,6 +51,7 @@ export default {
             return res.status(401).json({ message: "Senha incorreta" });
         }
 
+        const token = genToken({ id: user.id, email: user.email });
 
         return res.status(200).json(user);
     },
@@ -50,18 +60,58 @@ export default {
 
         const authHeader = req.headers.authorization;
 
-        if (!authHeader) {
-            return res.status(401).json({ message: "Sem token de autorização" });
+    if (!authHeader) {
+      return res.status(401).json({ message: "Sem token de autorização" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+      const decoded = jwt.verify(token, secretKey);
+
+      const updateFields = req.body;
+
+      const updatedUser = await UserModel.updateProfile(
+        decoded.email,
+        updateFields
+      );
+
+      return res.status(200).json(updatedUser);
+    } catch (err) {
+      return res.status(401).json({ message: "Token invalido" });
+    }
+  },
+  async deleteUser(req, res) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).json({ message: "Sem token de autorização" });
+    }
+    const token = authHeader.split(" ")[1];
+    try {
+        const decoded = jwt.verify(token, secretKey);
+        const deletedUser = await UserModel.deleteUser(decoded.email);
+        if (!deletedUser) {
+            return res.status(404).json({ message: "Usuário não encontrado" });
         }
+        return res.status(200).json(deletedUser);
+    }
+    catch (err) {
+        return res.status(401).json({ message: "Token inválido" });
+    }
+},
+  async getProfile(req, res) {
+    const authHeader = req.headers.authorization;
 
-        const token = authHeader.split(" ")[1];
+    if (!authHeader) {
+      return res.status(401).json({ message: "Sem token de autorizacao" });
+    }
 
-        try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const token = authHeader.split(" ")[1];
 
-            const updateFields = req.body;
+    try {
+      const decoded = jwt.verify(token, secretKey);
 
-            const updatedUser = await UserModel.updateProfile(decoded.email, updateFields);
+      const user = await UserModel.getUserByEmail(decoded.email);
 
             return res.status(200).json(updatedUser);
 
@@ -125,22 +175,5 @@ export default {
 
         return res.status(200).json(consulta)
 
-    },
-
-    async verifyToken(req, res) {
-        const authHeader = req.headers.authorization;
-
-        if (!authHeader) {
-            return res.status(401).json({ message: "Sem token de autorização"})
-        }
-        
-        const token = authHeader.split(" ")[1];
-
-        try {
-            const decode = jwt.verify(token, process.env.JWT_SECRET)
-            return res.status(200).json({ valid:true, decode })
-        } catch(err) {
-            return res.status(401).json({ message: "token invalido"})
-        }
     }
 }
