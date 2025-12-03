@@ -1,186 +1,159 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-:root {
-  --primary: #6C63FF;
-  --success: #00C851;
-  --bg-gradient: linear-gradient(160deg, #e0c3fc 0%, #8ec5fc 100%);
-}
-
-* { box-sizing: border-box; }
-
-/* ===== CONTAINER ===== */
+/* Missao.css */
 .missao-container {
-  background: var(--bg-gradient);
   min-height: 100vh;
+  background-color: #f8f9fa; /* Fundo cinza claro igual da imagem */
   padding: 20px;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  padding-bottom: 80px;
 }
 
-/* ===== CABEÇALHO ===== */
+/* --- Cabeçalho --- */
 .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
+/* Centralizando o título visualmente */
 .page-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #6C5CE7;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+  flex: 1; /* Ocupa o espaço para centralizar */
+}
+
+/* Ajuste para o botão do menu não empurrar o título */
+.header-top > :first-child {
+  position: absolute;
+  left: 20px;
+  z-index: 10;
 }
 
 .missao-subtitle {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 25px;
-    font-size: 14px;
-}
-
-/* Botão Menu */
-.btn-menu-toggle { background: none; border: none; cursor: pointer; padding: 0; }
-.icon-menu-main { width: 28px; height: 28px; filter: brightness(0) invert(1); }
-
-/* ===== LISTA ===== */
-.missao-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding-bottom: 30px;
-}
-
-/* ===== CARD ===== */
-.missao-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
-  border-left: 5px solid var(--primary); /* Indicador visual */
-  position: relative;
-}
-
-.missao-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-/* Estado Concluído */
-.missao-card.done {
-  border-left-color: var(--success);
-  background: #f9fffb;
-  opacity: 0.9;
-}
-
-/* Header do Card */
-.missao-header-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.missao-titulo {
-  font-size: 17px;
-  font-weight: 700;
-  color: #333;
-  margin: 0;
-}
-
-.missao-recompensa {
-  background: #f0f0f5;
-  color: var(--primary);
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 12px;
-}
-
-.missao-recompensa.done-badge {
-    background: #e0fce0;
-    color: var(--success);
-}
-
-.missao-desc-item {
-  margin: 5px 0 15px;
-  color: #666;
-  font-size: 14px;
+  color: #6C5CE7;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.4;
 }
 
-/* ===== BARRA DE PROGRESSO ===== */
+/* --- Lista de Missões --- */
+.missao-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card Padrão */
+.missao-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.missao-card:hover {
+  background-color: rgb(241, 241, 241);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transform: translateY(-3px);
+  border: #FF7675 1px solid;
+
+}
+
+.missao-card:active {
+  transform: scale(0.99);
+}
+
+/* Header do Card (Título + XP) */
+.missao-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.missao-titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #555;
+  margin: 0;
+}
+
+/* Badge de XP (Roxo) */
+.missao-recompensa {
+  background-color: #6C5CE7;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Descrição */
+.missao-desc-item {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+/* --- Barra de Progresso --- */
 .progress-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
 }
 
 .progress-bar {
-  flex: 1;
-  height: 8px;
-  background: #eee;
+  width: 100%;
+  height: 10px;
+  background-color: #E0E0E0; /* Cinza claro fundo */
   border-radius: 10px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--primary);
   border-radius: 10px;
-  transition: width 0.5s ease;
+  transition: width 0.5s ease-in-out;
 }
 
-.missao-card.done .progress-fill {
-    background: var(--success);
+/* Cores das barras baseadas no status */
+/* Em andamento (Rosa) */
+.progress-fill.pink { background-color: #FF7675; }
+/* Concluído (Roxo) */
+.progress-fill.purple { background-color: #6C5CE7; }
+/* Não iniciado (Invisível/Vazio) */
+.progress-fill.empty { width: 0; }
+
+
+/* Status Text (Abaixo da barra) */
+.status-text {
+  font-size: 0.85rem;
+  color: #777;
 }
 
-.progress-text {
-  font-size: 12px;
-  font-weight: 600;
-  color: #888;
-  min-width: 35px;
-  text-align: right;
+/* --- Card Concluído (Estilo Especial) --- */
+/* Fundo rosa claro e borda rosa */
+.missao-card.done {
+  background-color: #f0ecfc; 
+  border: 1px solid #7e75ff;
 }
 
-.check-icon {
-    font-size: 12px;
-    color: var(--success);
-    font-weight: bold;
-    margin-top: 10px;
-    text-align: right;
+.missao-card.done:hover {
+  background-color: #dedaea;
+  border: 1px solid #7e75ff;
 }
-
-/* ===== MENU LATERAL (Side Menu) ===== */
-.menu-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 900;
-    opacity: 0; visibility: hidden; transition: 0.3s;
-}
-.menu-overlay.open { opacity: 1; visibility: visible; }
-
-.side-menu {
-    position: fixed; top: 0; left: -280px; width: 280px; height: 100vh;
-    background: #fff; z-index: 1000; padding: 20px;
-    transition: left 0.3s ease-in-out;
-    border-radius: 0 20px 20px 0;
-    display: flex; flex-direction: column; gap: 10px;
-}
-.side-menu.open { left: 0; }
-
-.side-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-.side-title { color: var(--primary); margin: 0; font-size: 20px; }
-.btn-close { background: none; border: none; font-size: 28px; color: #888; cursor: pointer; }
-
-.side-item {
-    display: flex; align-items: center; gap: 15px;
-    background: transparent; border: none; width: 100%; padding: 12px 15px;
-    font-size: 16px; color: #555; font-weight: 500; cursor: pointer;
-    border-radius: 12px; transition: 0.2s;
-}
-.side-item:hover, .side-item.active { background: #f0f0ff; color: var(--primary); }
-.icon-side { width: 24px; height: 24px; object-fit: contain; }
