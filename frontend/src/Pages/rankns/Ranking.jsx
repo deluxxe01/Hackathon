@@ -1,22 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Ranking.css";
 
 export default function Ranking() {
   const navigate = useNavigate();
+  // Estado para controlar se o menu está aberto ou fechado
+  const [openMenu, setOpenMenu] = useState(false);
 
-  // Exemplo de ranking — depois você pode puxar do backend
+  // --- Ícones (Definidos internamente conforme seu exemplo) ---
+  const MenuIcon = () => (
+    <img src="./icons/lista.png" className='icon-menu-main' alt="Menu" />
+  );
+  
+  const HomeRIcon = () => (
+    <img src="./icons/home-r.png" className='icon-burguer-r' alt="Home" />
+  );
+  const MedalRIcon = () => ( 
+    <img src="./icons/medalha-r.png" className='icon-burguer-r' alt="Medalha" />
+  );
+  const MissionRIcon = () => ( 
+    <img src="./icons/missao-r.png" className='icon-burguer-r' alt="Missão" />
+  );
+  const RankingRIcon = () => ( 
+    <img src="./icons/ranking-r.png" className='icon-burguer-r' alt="Ranking" />
+  );
+  const UserRIcon = () => (
+    <img src="./icons/user-r.png" className='icon-burguer-r' alt="User" />
+  );
+
+  // --- Dados do Ranking (Adicionei os emojis que faltavam) ---
   const ranking = [
-    { pos: 1, nome: "Lucas Silva", pontos: 1280, emoji: "👑" },
-    { pos: 2, nome: "Mariana Souza", pontos: 1120, emoji: "🔥" },
-    { pos: 3, nome: "Pedro Martins", pontos: 960, emoji: "⚡" },
-    { pos: 4, nome: "João Almeida", pontos: 820, emoji: "💪" },
-    { pos: 5, nome: "Você", pontos: 780, emoji: "😎" },
+    { pos: 1, nome: "Lucas Silva", pontos: 1280},
+    { pos: 2, nome: "Mariana Souza", pontos: 1120},
+    { pos: 3, nome: "Pedro Martins", pontos: 960},
+    { pos: 4, nome: "João Almeida", pontos: 820},
+    { pos: 5, nome: "Você", pontos: 780},
   ];
 
   return (
     <div className="ranking-container">
 
+      {/* Cabeçalho com Botão de Menu */}
+      <div className="header-top">
+        <button className="btn-menu-toggle" onClick={() => setOpenMenu(true)}>
+            <MenuIcon />
+        </button>
+      </div>
+
+      {/* --- MENU LATERAL (SIDEBAR) --- */}
+      {/* Overlay escuro para fechar ao clicar fora */}
+      <div className={`menu-overlay ${openMenu ? "open" : ""}`} onClick={() => setOpenMenu(false)} />
+      
+      <div className={`side-menu ${openMenu ? "open" : ""}`}>
+        <div className="side-header">
+            <h3 className="side-title">Menu</h3>
+            <button className="btn-close" onClick={() => setOpenMenu(false)}>×</button>
+        </div>
+
+        <button className="side-item" onClick={() => navigate('/')}>
+            <HomeRIcon /> <span>Home</span>
+        </button>
+        <button className="side-item" onClick={() => {navigate('/perfil'); setOpenMenu(false)}}>
+            <UserRIcon /> <span>Perfil</span>
+        </button>
+        <button className="side-item" onClick={() => navigate('/conquista')}>
+            <MedalRIcon /> <span>Conquistas</span>
+        </button>
+        <button className="side-item active" onClick={() => setOpenMenu(false)}>
+            <RankingRIcon /> <span>Ranking</span>
+        </button>
+        <button className="side-item" onClick={() => navigate('/missao')}>
+            <MissionRIcon /> <span>Missões</span>
+        </button>
+      </div>
+
+      {/* --- CONTEÚDO DO RANKING --- */}
       <h2 className="ranking-title">Ranking Global</h2>
       <p className="ranking-desc">Suba posições treinando diariamente!</p>
 
@@ -42,57 +100,6 @@ export default function Ranking() {
         Voltar
       </button>
 
-      {/* Navegação inferior */}
-     <nav className="bottom-nav">
-
-    <div className="nav-item" onClick={() => navigate('/missao')}>
-        <span className="nav-icon">⚔️</span> Missões
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/ranking')}>
-        <span className="nav-icon">🏆</span> Ranking
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/conquista')}>
-        <span className="nav-icon">🏅</span> Badges
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/nivel')}>
-        <span className="nav-icon">📶</span> Níveis
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/rotina')}>
-        <span className="nav-icon">📅</span> Rotina
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/ligas')}>
-        <span className="nav-icon">🔥</span> Ligas
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/estatistica')}>
-        <span className="nav-icon">📊</span> Estatísticas
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/configuracao')}>
-        <span className="nav-icon">⚙️</span> Configurações
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/historico_missao')}>
-        <span className="nav-icon">📘</span> Histórico Missões
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/historico_treino')}>
-        <span className="nav-icon">🏋️</span> Histórico Treinos
-    </div>
-
-    <div className="nav-item" onClick={() => navigate('/progresso')}>
-        <span className="nav-icon">📈</span> Progresso
-    </div>
-
-    <div className="nav-item active">
-        <span className="nav-icon">👤</span> Perfil
-    </div>
-</nav>
     </div>
   );
 }

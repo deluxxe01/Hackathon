@@ -1,163 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --primary: #6C63FF;
+  --success: #00C851;
+  --bg-gradient: linear-gradient(160deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+
+* { box-sizing: border-box; }
+
 /* ===== CONTAINER ===== */
 .missao-container {
-  background: #000;
+  background: var(--bg-gradient);
   min-height: 100vh;
-  padding: 32px 22px 120px;
-  color: #fff;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
-/* ===== TÍTULOS ===== */
-.missao-title {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 800;
-  margin-bottom: 6px;
-  letter-spacing: 1px;
+/* ===== CABEÇALHO ===== */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.missao-desc {
-  text-align: center;
-  color: #b8b8b8;
-  margin-bottom: 30px;
-  font-size: 16px;
+.page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.missao-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+/* Botão Menu */
+.btn-menu-toggle { background: none; border: none; cursor: pointer; padding: 0; }
+.icon-menu-main { width: 28px; height: 28px; filter: brightness(0) invert(1); }
 
 /* ===== LISTA ===== */
 .missao-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
+  padding-bottom: 30px;
 }
 
 /* ===== CARD ===== */
 .missao-card {
-  background: linear-gradient(145deg, #0b0b0b, #121212);
-  border: 1px solid #1f1f1f;
+  background: #ffffff;
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 18px;
-  transition: 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+  border-left: 5px solid var(--primary); /* Indicador visual */
+  position: relative;
 }
 
 .missao-card:hover {
-  transform: scale(1.02);
-  border-color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* ===== CONCLUÍDA ===== */
+/* Estado Concluído */
 .missao-card.done {
-  border-color: #00ff99;
-  background: linear-gradient(145deg, #0e1f17, #0f2b20);
-  box-shadow: 0 0 10px rgba(0, 255, 140, 0.25);
+  border-left-color: var(--success);
+  background: #f9fffb;
+  opacity: 0.9;
 }
 
-.missao-card.done .progress-fill {
-  background: #00ff99 !important;
-}
-
-/* ===== HEADER ===== */
-.missao-header {
+/* Header do Card */
+.missao-header-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .missao-titulo {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
+  color: #333;
+  margin: 0;
 }
 
 .missao-recompensa {
-  background: #fff;
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
+  background: #f0f0f5;
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
 }
 
-/* ===== DESCRIÇÃO ITEM ===== */
+.missao-recompensa.done-badge {
+    background: #e0fce0;
+    color: var(--success);
+}
+
 .missao-desc-item {
-  margin: 10px 0 14px;
-  color: #ccc;
-  font-size: 15px;
+  margin: 5px 0 15px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
-/* ===== PROGRESS BAR ===== */
+/* ===== BARRA DE PROGRESSO ===== */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #1f1f1f;
-  border-radius: 8px;
+  flex: 1;
+  height: 8px;
+  background: #eee;
+  border-radius: 10px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: #5b8dff;
-  width: 0%;
-  transition: width 0.4s ease;
+  background: var(--primary);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.missao-card.done .progress-fill {
+    background: var(--success);
 }
 
 .progress-text {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #bbb;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  min-width: 35px;
+  text-align: right;
 }
 
-/* ===== BOTÃO VOLTAR ===== */
-.btn-voltar {
-  background: #fff;
-  color: #000;
-  padding: 15px;
-  font-size: 17px;
-  font-weight: bold;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-  margin-top: 32px;
+.check-icon {
+    font-size: 12px;
+    color: var(--success);
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: right;
 }
 
-.btn-voltar:active {
-  transform: scale(0.96);
+/* ===== MENU LATERAL (Side Menu) ===== */
+.menu-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 900;
+    opacity: 0; visibility: hidden; transition: 0.3s;
 }
+.menu-overlay.open { opacity: 1; visibility: visible; }
 
-/* ===== BOTTOM NAV ===== */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(6px);
-  padding: 14px 0;
-  display: flex;
-  justify-content: space-around;
-  border-top: 1px solid #222;
+.side-menu {
+    position: fixed; top: 0; left: -280px; width: 280px; height: 100vh;
+    background: #fff; z-index: 1000; padding: 20px;
+    transition: left 0.3s ease-in-out;
+    border-radius: 0 20px 20px 0;
+    display: flex; flex-direction: column; gap: 10px;
 }
+.side-menu.open { left: 0; }
 
-.nav-item {
-  text-align: center;
-  font-size: 14px;
-  color: #949494;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+.side-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.side-title { color: var(--primary); margin: 0; font-size: 20px; }
+.btn-close { background: none; border: none; font-size: 28px; color: #888; cursor: pointer; }
 
-.nav-item:hover {
-  color: #fff;
-  transform: scale(1.05);
+.side-item {
+    display: flex; align-items: center; gap: 15px;
+    background: transparent; border: none; width: 100%; padding: 12px 15px;
+    font-size: 16px; color: #555; font-weight: 500; cursor: pointer;
+    border-radius: 12px; transition: 0.2s;
 }
-
-.nav-item.active {
-  color: #fff;
-  font-weight: bold;
-  transform: scale(1.1);
-}
-
-.nav-icon {
-  display: block;
-  font-size: 20px;
-  margin-bottom: 4px;
-}
+.side-item:hover, .side-item.active { background: #f0f0ff; color: var(--primary); }
+.icon-side { width: 24px; height: 24px; object-fit: contain; }
