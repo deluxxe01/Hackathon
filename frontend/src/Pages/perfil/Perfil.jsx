@@ -1,89 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Barguer from "../../components/barguers/Barguer";
 import './Perfil.css';
 
-// --- ÍCONES ---
+// --- ÍCONES ESPECÍFICOS DO PERFIL ---
+// Removemos os ícones do menu (HomeRIcon, MedalRIcon, etc) pois agora vivem no Burguer.jsx
+
 const ArrowLeft = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
 );
 
-const MenuIcon = () => (
-  <img src="./icons/lista.png" className='icon-lista' alt="" />
-);
-
 const UserIcon = () => (
-  <img src="./icons/user-b.png" className='icon-user' alt="" />
+  <img src="./icons/user-b.png" className='icon-user' alt="User" />
 );
 
 const RulerIcon = () => (
-  <img src="./icons/regua.png" className='icon-regua' alt="" />
+  <img src="./icons/regua.png" className='icon-regua' alt="Régua" />
 );
-
-const HomeRIcon = () => (
-  <img src="./icons/home-r.png" className='icon-burguer-r' alt="Home" />
-);
-const MedalRIcon = () => ( 
-  <img src="./icons/medalha-r.png" className='icon-burguer-r' alt="Medalha" />
-);
-const MissionRIcon = () => ( 
-  <img src="./icons/missao-r.png" className='icon-burguer-r' alt="Missão" />
-);
-const RankingRIcon = () => ( 
-  <img src="./icons/ranking-r.png" className='icon-burguer-r' alt="Ranking" />
-);
-const UserRIcon = () => (
-  <img src="./icons/user-r.png" className='icon-burguer-r' alt="User" />
-);
-
-function icons() {
-  const HomeBIcon = () => (
-    <img src="./icons/home-b.png" className='icon-home-b' alt="Home" />
-  );
-  
-  
-  // --- KG (Peso/Unidade) ---
-  const KgIcon = () => (
-    <img src="./icons/KG.png" className='icon-kg' alt="KG" />
-  );
-  
-  // --- Medalha (Medal) ---
-  const MedalIcon = () => ( // Versão B (Padrão)
-    <img src="./icons/medalha-b.png" className='icon-medalha-b' alt="Medalha" />
-  );
-  
-  
-  // --- Missão (Mission) ---
-  const MissionIcon = () => ( // Versão B (Padrão)
-    <img src="./icons/missao-b.png" className='icon-missao-b' alt="Missão" />
-  );
-  
-  
-  // --- Prancheta (Clipboard) ---
-  const ClipboardIcon = () => (
-    <img src="./icons/prancheta.png" className='icon-prancheta' alt="Prancheta" />
-  );
-  
-  // --- Ranking ---
-  const RankingIcon = () => ( // Versão B (Padrão)
-    <img src="./icons/ranking-b.png" className='icon-ranking-b' alt="Ranking" />
-  );
-  
-  
-  // --- Trena (Tape Measure) ---
-  const TapeIcon = () => (
-    <img src="./icons/trena.png" className='icon-trena' alt="Trena" />
-  );
-  
-  // --- User (Versão R) ---
-  // Nota: UserIcon (versão -b) já foi criado no seu exemplo.
-  
-}
-
 
 export default function Perfil() {
   const navigate = useNavigate();
   const [view, setView] = useState('menu'); 
-  const [openMenu, setOpenMenu] = useState(false); // <<< MENU LATERAL
+  // O state 'openMenu' foi removido, pois o Burguer gerencia isso sozinho agora.
 
   // Simulação de dados do usuário
   const [userData, setUserData] = useState({
@@ -105,39 +43,16 @@ export default function Perfil() {
     setView('menu');
   };
 
-  // MENU LATERAL (Hambúrguer)
-  const renderSideMenu = () => (
-    <>
-      {/* Overlay escuro */}
-      <div 
-        className={`overlay ${openMenu ? "show" : ""}`} 
-        onClick={() => setOpenMenu(false)}
-      />
-
-      {/* Menu Lateral */}
-      <div className={`side-menu ${openMenu ? "open" : ""}`}>
-        <h3 className="side-title">Menu</h3>
-
-        <button className="side-item" onClick={() => navigate('/')}><HomeRIcon /> Home</button>
-        <button className="side-item" onClick={() => setOpenMenu(false)}><UserRIcon /> Perfil</button>
-        <button className="side-item" onClick={() => navigate('/Conquista')}><MedalRIcon /> Conquistas</button>
-        <button className="side-item" onClick={() => navigate('/Ranking')}>< RankingRIcon /> Ranking</button>
-        <button className="side-item" onClick={() => navigate('/Missao')}><MissionRIcon /> Missões</button>
-      </div>
-    </>
-  );
-
   // --- TELAS ---
+
   const renderMenu = () => (
     <div className="perfil-content fade-in">
       
       <header className="perfil-header-menu">
         <h2 className="title">Perfil</h2>
 
-        {/* BOTÃO ABRE MENU */}
-        <button className="btn-icon" onClick={() => setOpenMenu(true)}>
-          <MenuIcon />
-        </button>
+        {/* AQUI ESTÁ A MÁGICA: O componente Burguer substitui todo aquele código antigo */}
+        <Barguer />
       </header>
 
       <div className="menu-cards">
@@ -195,11 +110,9 @@ export default function Perfil() {
     </div>
   );
 
-
   return (
     <div className="perfil-container">
-
-      {renderSideMenu()}
+      {/* Removemos {renderSideMenu()} daqui */}
 
       {view === 'menu' && renderMenu()}
       {view === 'dados' && renderDados()}

@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/home/Home";
+import Home from "../Pages/home/Home";
 import Cadastro from "../Pages/cadastro/Cadastro";
-import Login from "../pages/login/Login";
+import Login from "../Pages/login/Login";
 import Perfil from "../pages/perfil/Perfil";
 import Conquista from "../pages/conquistas/Conquista";
 import Ranking from "../pages/rankns/Ranking";
 import Missao from "../pages/missoes/Missao";
+import Estatistica from "../pages/estatisticas/Estatistica";
 
 const router = createBrowserRouter([
     { path: "/", element: <Home /> },
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     { path: "/Conquista", element: <Conquista /> },
     { path: "/Ranking", element: <Ranking /> },
     { path: "/Missao", element: <Missao /> },
+    { path: "Estatistica", element: <Estatistica /> },
 ]);
 
 export default router;

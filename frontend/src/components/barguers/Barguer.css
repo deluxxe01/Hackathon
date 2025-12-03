@@ -1,0 +1,103 @@
+/* Burguer.css */
+
+/* Botão que abre o menu (o ícone de lista) */
+.btn-burguer-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-lista {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* --- ÍCONES INTERNOS DO MENU (Versão R) --- */
+  .icon-burguer-r {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px; /* Espaço entre ícone e texto */
+    vertical-align: middle;
+  }
+  
+  /* --- OVERLAY (Fundo escuro) --- */
+  .burguer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 998; /* Alto para ficar acima de tudo */
+  }
+  
+  .burguer-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* --- MENU LATERAL (Gaveta) --- */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Começa escondido na direita */
+    width: 260px;
+    height: 100vh;
+    background: #ffffff;
+    padding: 25px 20px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.20);
+    transition: right 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animação suave */
+    z-index: 999; /* Acima do overlay */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  
+  .side-menu.open {
+    right: 0; /* Entra na tela */
+  }
+  
+  .side-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #6C5CE7;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  /* Botões de navegação */
+  .side-item {
+    width: 100%;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #444;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+  
+  .side-item:hover {
+    background-color: #e0e0e0;
+    transform: translateX(-5px); /* Move levemente para a esquerda */
+    color: #6C5CE7;
+  }
+  
+  .side-item:active {
+    transform: scale(0.98);
+  }
