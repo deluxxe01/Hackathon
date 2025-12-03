@@ -16,3 +16,5 @@ Exemplo de corpo para colocar em uma requisição
   "largura_abdomen": 30,
   "id_usuario": "b533e977-96dc-4da2-82c2-937447e8b660"
 }
+
+//// payload para atualização de medidas
