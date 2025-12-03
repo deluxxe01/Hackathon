@@ -62,6 +62,7 @@ export default function Dashboard() {
         <h3>Missões Concluidas</h3>
         {/* Usando IconsBranca.Mission (Alvo/Missão) */}
         <div className="section-icon-wrapper">
+          <img src="./icons/missao-r.png" alt="" />
             <IconsBranca.Mission />
         </div>
       </div>
@@ -86,30 +87,8 @@ export default function Dashboard() {
     </section>
   );
 
-  // 3. Ranking (Simples)
-  const RankingPreview = () => (
-    <section className="section-container fade-in delay-3">
-      <div className="section-header">
-        <h3>Ranking Global</h3>
-        {/* Usando IconsBranca.Ranking (Pódio) */}
-        <div className="section-icon-wrapper">
-            <IconsBranca.Ranking />
-        </div>
-      </div>
-      <div className="ranking-item top-1">
-        <span className="rank-pos">1</span>
-        <div className="rank-avatar">LS</div>
-        <span className="rank-name">Lucas Silva</span>
-        <span className="rank-pts">1280 pts</span>
-      </div>
-      <div className="ranking-item user-rank">
-        <span className="rank-pos">5</span>
-        <div className="rank-avatar me">EU</div>
-        <span className="rank-name">Você</span>
-        <span className="rank-pts">780 pts</span>
-      </div>
-    </section>
-  );
+  
+
 
   return (
     <div className="dashboard-container">
@@ -118,7 +97,7 @@ export default function Dashboard() {
       <div className="top-bar">
         <Barguer />
         
-        <h1 className="app-logo">VittaLight</h1>
+        <h1 className="app-logo">Estatísticas</h1>
         
         <div className="profile-pic-placeholder" onClick={() => navigate('/perfil')}>
           EU
@@ -132,8 +111,7 @@ export default function Dashboard() {
         {/* Missões */}
         <MissionsSection />
         
-        {/* Ranking */}
-        <RankingPreview />
+        
         
       </div>
     </div>

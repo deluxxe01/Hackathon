@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
 .badges-container {
   display: flex;
   flex-direction: column;
@@ -10,6 +13,7 @@
 
 /* --- Cabeçalho Ajustado --- */
 .page-header {
+  font-family: 'Poppins', sans-serif;
   box-shadow: 0 4px 15px rgba(123, 97, 255, 0.1); /* Suavizei levemente a sombra */
   color: #9F8BFF;
   margin-bottom: 20px;
@@ -111,6 +115,7 @@
 }
 
 .badge-name {
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 0.85rem;
   color: #5a4b8f;
@@ -118,6 +123,7 @@
 }
 
 .badge-desc {
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   color: #888;
   line-height: 1.2;

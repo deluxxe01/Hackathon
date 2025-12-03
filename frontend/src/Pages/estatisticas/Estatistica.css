@@ -61,7 +61,7 @@
 
 /* 1. Level Card */
 .level-card {
-  background: linear-gradient(135deg, #6C5CE7 0%, #a29bfe 100%);
+  background: linear-gradient(135deg, #6C5CE7 0%, #FF6584 100%);
   border-radius: 20px;
   padding: 20px;
   color: white;
@@ -116,7 +116,7 @@
 
 .progress-bar-fill {
   height: 100%;
-  background-color: #00cec9; /* Ciano para destaque */
+  background-color: #ffffff; /* Ciano para destaque */
   border-radius: 10px;
 }
 
@@ -169,7 +169,7 @@
 }
 
 .mission-title.completed { text-decoration: line-through; color: #b2bec3; }
-.mission-xp { color: #fdcb6e; font-weight: bold; }
+.mission-xp { color: #FF6584; font-weight: bold; }
 
 .mini-progress-bg {
   width: 100%;

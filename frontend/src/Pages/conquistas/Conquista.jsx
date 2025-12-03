@@ -9,12 +9,12 @@ export default function Conquistas() {
 
   // --- Dados dos Badges (Mock) ---
   const badges = [
-    { id: 1, name: 'Primeiros Passos', desc: 'Completou 1 missão', icon: '🦶', unlocked: true },
-    { id: 2, name: 'Hidratado', desc: 'Bebeu 2L de água', icon: '💧', unlocked: true },
-    { id: 3, name: 'Chama Eterna', desc: '7 dias de ofensiva', icon: '🔥', unlocked: false },
+    { id: 1, name: 'Passos de ouro', desc: 'Completou 1 missão', icon: '🏆', unlocked: true },
+    { id: 2, name: 'Senhor do oceano', desc: 'Bebeu 3L de àgua por três dias seguidos', icon: '💧', unlocked: true },
+    { id: 3, name: 'Yoga Zen', desc: '7 dias de ofensiva', icon: '🧘🏽‍♀️', unlocked: false },
     { id: 4, name: 'Máquina', desc: 'Chegou ao Nível 10', icon: '🤖', unlocked: false },
-    { id: 5, name: 'Social', desc: 'Entrou em uma Liga', icon: '🤝', unlocked: true },
-    { id: 6, name: 'Lendário', desc: 'Top 1 no Ranking', icon: '👑', unlocked: false },
+    { id: 5, name: 'Campeão da Disciplina', desc: 'Top 1 no Ranking', icon: '🤴🏽', unlocked: true },
+    { id: 6, name: 'Caçador de Vitaminas', desc: 'Comeu o dobro', icon: '🧝🏽', unlocked: false },
   ];
 
   return (
@@ -22,7 +22,7 @@ export default function Conquistas() {
       
       {/* --- CABEÇALHO (Header) --- */}
       <header className="page-header">
-        <h1 className="page-title">Suas <span>Conquistas</span></h1>
+        <h1 className="page-title">Suas Conquistas</h1>
         
         {/* Componente Burguer substitui o botão antigo e o menu lateral */}
         <Barguer />

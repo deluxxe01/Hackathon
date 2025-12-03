@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     { path: "/Conquista", element: <Conquista /> },
     { path: "/Ranking", element: <Ranking /> },
     { path: "/Missao", element: <Missao /> },
-    { path: "Estatistica", element: <Estatistica /> },
+    { path: "/Estatistica", element: <Estatistica /> },
 ]);
 
 export default router;
