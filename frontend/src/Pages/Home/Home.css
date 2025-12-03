@@ -61,11 +61,16 @@
 }
 
 .illustration-container {
-  margin-bottom: 30px;
-  height: 250px; /* Altura fixa para evitar pulos na tela */
-  display: flex;
-  align-items: flex-end; /* Alinha a imagem na base */
-  justify-content: center;
+  width: 100%;
+    /* 🔑 ESSENCIAL: Defina uma altura fixa para este container. 
+       Isso garante que o espaço reservado para a imagem seja sempre o mesmo. */
+    height: 250px; /* Exemplo: Ajuste conforme a altura máxima desejada para suas SVGs */
+    
+    /* Garante que a imagem se centralize dentro deste espaço */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .slide-image {

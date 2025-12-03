@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Cadastro.css';
 import axios from 'axios';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 function Cadastro() {
   const navigate = useNavigate();
