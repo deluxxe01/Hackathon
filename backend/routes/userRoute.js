@@ -9,6 +9,8 @@ rotasUser.post("/user/login",UserControl.loginUser)
 rotasUser.patch("/user/profile",UserControl.updateProfile)
 // rotasUser.delete("/user",UserControl.deleteUser)
 rotasUser.post("/medidas/create",UserControl.createInfo)//rota para a criação de medidas
-rotasUser.put("/medidas/update",UserControl.updateMedidas)
+rotasUser.put("/medidas/update/:id",UserControl.updateMedidas)
+rotasUser.get("/medidas/:id",UserControl.getMedidas)
+rotasUser.put("/getXp/:id",UserControl.obtainXp)
 
 export default rotasUser

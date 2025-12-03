@@ -2,11 +2,16 @@ import UserModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import genToken from "../util/jwtRoute.js";
 import MedidasModel from "../models/MedidasModel.js";
+import jwt from "jsonwebtoken"
 
 export default {
+
     async CreateUser(req, res) {
+
         const { nome, email, senha, data_nascimento, genero } = req.body;
+
         const salt = bcrypt.genSaltSync(10);
+
         const hashedPassword = bcrypt.hashSync(senha, salt);
 
         const consulta = await UserModel.createUser({ nome, email, hashedPassword, data_nascimento, genero });
@@ -23,9 +28,11 @@ export default {
 
         if (!user) {
             return res.status(404).json({ message: "Usuario não encontrado" });
-        }
 
-        const isPasswordValid = bcrypt.compareSync(senha, user.hashedPassword);
+            
+        }
+       
+        const isPasswordValid = bcrypt.compareSync(senha, user.senha);
         
 
         if (!isPasswordValid) {
@@ -105,5 +112,24 @@ export default {
 
         return res.status(200).json(consulta)
 
-     }
+     },
+     async getMedidas(req,res){
+
+        const id = req.params.id
+
+        const consulta = await MedidasModel.getInfos(id)
+
+        return res.status(200).json(consulta)
+    },
+    async obtainXp(req,res){
+
+        const {xp} = req.body
+
+        const id = req.params.id
+
+        const consulta = await UserModel.getXp({xp,id})
+
+        return res.status(200).json(consulta)
+
+    }
 }
