@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Barguer from "../../components/barguers/Barguer";
 import './Perfil.css';
-import { GlobalContext } from '../../context/GlobalContext';
 
 // --- ÍCONES ---
 const ArrowLeft = () => (
@@ -19,103 +18,35 @@ const RulerIcon = () => (
 
 // Placeholder para ilustração
 const IllustrationGirl = () => (
-  <img src="./images/girl-flower.png" className='illustration-wizard' alt="Ilustração" style={{maxWidth: '150px', marginTop: '20px'}} />
+  <img src="./img-vitta/tecnico.svg" className='illustration-wizard' alt="Ilustração" style={{maxWidth: '150px', marginTop: '20px'}} />
 );
-
+// src="./img-vitta/flor.svg"
 export default function Perfil() {
   const navigate = useNavigate();
-  const { userOn, setUserOn } = useContext(GlobalContext);
 
+  // Estados apenas para controle de navegação de telas
   const [view, setView] = useState('menu'); 
   const [wizardStep, setWizardStep] = useState(1);
   const [isEditingMedidas, setIsEditingMedidas] = useState(false);
 
-  // ADICIONADO: Campo 'quadril' no estado
-  const [medidas, setMedidas] = useState({
-    altura: '',   // em metros (ex: 1.70)
-    peso: '',     // em kg
-    abdomen: '',  // em cm
-    quadril: ''   // em cm (Necessário para o RCQ)
-  });
-
-  const handleChangeUser = (e) => {
-    setUserOn({ ...userOn, [e.target.name]: e.target.value });
-  };
-
-  const handleChangeMedidas = (e) => {
-    setMedidas({ ...medidas, [e.target.name]: e.target.value });
-  };
-
-  // --- LÓGICA DE NAVEGAÇÃO ---
+  // --- NAVEGAÇÃO ---
 
   const handleClickMedidasMenu = () => {
-    // Verifica se tem os dados mínimos
-    const temMedidas = medidas.altura && medidas.peso;
-
-    if (temMedidas) {
-      setIsEditingMedidas(false);
-      setView('medidas_resumo');
-    } else {
-      setWizardStep(1);
-      setView('medidas_wizard');
-    }
+    // Redireciona sempre para o Wizard para demonstração
+    setWizardStep(1);
+    setView('medidas_wizard');
   };
 
   const handleSaveDados = () => {
-    alert("Dados pessoais salvos!");
     setView('menu');
   };
 
   const handleSaveMedidas = () => {
-    alert("Medidas atualizadas!");
     setIsEditingMedidas(false);
   };
 
   const handleFinalizarWizard = () => {
-    if(!medidas.quadril) {
-        alert("Por favor, preencha o quadril para cálculos precisos.");
-        return;
-    }
-    alert("Medidas cadastradas com sucesso!");
     setView('medidas_resumo'); 
-  };
-
-  // --- FUNÇÕES DE CÁLCULO ---
-
-  const calcularIndicadores = () => {
-    const altura = parseFloat(medidas.altura.replace(',', '.'));
-    const peso = parseFloat(medidas.peso);
-    const abdomen = parseFloat(medidas.abdomen);
-    const quadril = parseFloat(medidas.quadril);
-
-    if (!altura || !peso) return null;
-
-    // 1. IMC = Peso / Altura²
-    const imc = (peso / (altura * altura)).toFixed(2);
-    let imcStatus = "Normal";
-    if (imc < 18.5) imcStatus = "Abaixo do peso";
-    else if (imc >= 25 && imc < 30) imcStatus = "Sobrepeso";
-    else if (imc >= 30) imcStatus = "Obesidade";
-
-    // 2. ICA = Cintura (cm) / Altura (cm) 
-    // Como altura está em metros, multiplicamos por 100, ou dividimos cintura por 100
-    // Fórmula: Cintura(m) / Altura(m)
-    const ica = ((abdomen / 100) / altura).toFixed(2);
-    const icaStatus = ica < 0.5 ? "Saudável" : "Risco Aumentado";
-
-    // 3. RCQ = Cintura / Quadril
-    let rcq = "N/A";
-    let rcqStatus = "Dados incompletos";
-    
-    if (abdomen && quadril) {
-        rcq = (abdomen / quadril).toFixed(2);
-        // Valor de referência genérico (0.85 mulheres / 0.90 homens)
-        // Usando uma média simples para visualização se não soubermos gênero
-        const limite = userOn.genero?.toLowerCase().includes('fem') ? 0.85 : 0.90;
-        rcqStatus = rcq < limite ? "Risco Baixo" : "Risco Elevado";
-    }
-
-    return { imc, imcStatus, ica, icaStatus, rcq, rcqStatus };
   };
 
   // --- RENDERIZAÇÃO DAS TELAS ---
@@ -151,10 +82,10 @@ export default function Perfil() {
       </header>
 
       <div className="form-container">
-        <input className="input-field" name="nome" placeholder="Nome Completo" value={userOn.nome || ''} onChange={handleChangeUser} />
-        <input className="input-field" name="email" placeholder="Email" value={userOn.email || ''} onChange={handleChangeUser} />
-        <input className="input-field" name="genero" placeholder="Gênero" value={userOn.genero || ''} onChange={handleChangeUser} />
-        <input className="input-field" name="senha" type="password" placeholder="Senha" value={userOn.senha || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="nome" placeholder="Nome Completo" />
+        <input className="input-field" name="email" placeholder="Email" />
+        <input className="input-field" name="genero" placeholder="Gênero" />
+        <input className="input-field" name="senha" type="password" placeholder="Senha" />
 
         <div className="action-buttons">
           <button className="btn-edit">Editar dados</button>
@@ -181,10 +112,10 @@ export default function Perfil() {
           <>
             <div style={{width: '100%'}}>
               <label className="label-field">Altura (m)</label>
-              <input className="input-field" name="altura" type="number" placeholder="Ex: 1.75" value={medidas.altura} onChange={handleChangeMedidas} />
+              <input className="input-field" name="altura" type="number" placeholder="Ex: 1.75" />
               
               <label className="label-field">Peso (kg)</label>
-              <input className="input-field" name="peso" type="number" placeholder="Ex: 70" value={medidas.peso} onChange={handleChangeMedidas} />
+              <input className="input-field" name="peso" type="number" placeholder="Ex: 70" />
             </div>
             
             <button className="btn-save" style={{marginTop: '20px'}} onClick={() => setWizardStep(2)}>
@@ -202,11 +133,10 @@ export default function Perfil() {
           <>
              <div style={{width: '100%'}}>
               <label className="label-field">Cintura/Abdômen (cm)</label>
-              <input className="input-field" name="abdomen" type="number" placeholder="Ex: 80" value={medidas.abdomen} onChange={handleChangeMedidas} />
+              <input className="input-field" name="abdomen" type="number" placeholder="Ex: 80" />
 
-              {/* CAMPO NOVO ADICIONADO */}
               <label className="label-field">Quadril (cm)</label>
-              <input className="input-field" name="quadril" type="number" placeholder="Ex: 100" value={medidas.quadril} onChange={handleChangeMedidas} />
+              <input className="input-field" name="quadril" type="number" placeholder="Ex: 100" />
             </div>
 
             <button className="btn-save" style={{marginTop: '20px'}} onClick={handleFinalizarWizard}>
@@ -235,17 +165,16 @@ export default function Perfil() {
 
       <div className="form-container">
         <label>Altura (m)</label>
-        <input className="input-field" name="altura" disabled={!isEditingMedidas} value={medidas.altura} onChange={handleChangeMedidas} />
+        <input className="input-field" placeholder="1.75" disabled={!isEditingMedidas} />
         
         <label>Peso (kg)</label>
-        <input className="input-field" name="peso" disabled={!isEditingMedidas} value={medidas.peso} onChange={handleChangeMedidas} />
+        <input className="input-field" placeholder="70" disabled={!isEditingMedidas} />
         
         <label>Cintura/Abdômen (cm)</label>
-        <input className="input-field" name="abdomen" disabled={!isEditingMedidas} value={medidas.abdomen} onChange={handleChangeMedidas} />
+        <input className="input-field" placeholder="80" disabled={!isEditingMedidas} />
 
-        {/* CAMPO NOVO ADICIONADO NO RESUMO */}
         <label>Quadril (cm)</label>
-        <input className="input-field" name="quadril" disabled={!isEditingMedidas} value={medidas.quadril} onChange={handleChangeMedidas} />
+        <input className="input-field" placeholder="100" disabled={!isEditingMedidas} />
 
         <div className="action-buttons">
           <button className="btn-edit" onClick={() => setIsEditingMedidas(true)}>Editar dados</button>
@@ -262,10 +191,8 @@ export default function Perfil() {
     </div>
   );
 
-  // TELA 3: CÁLCULOS
+  // TELA 3: CÁLCULOS (Exibição estática)
   const renderCalculos = () => {
-    const results = calcularIndicadores();
-
     return (
       <div className="perfil-content fade-in">
         <header className="perfil-header-back">
@@ -276,41 +203,31 @@ export default function Perfil() {
         </header>
 
         <div className="form-container">
-           {results ? (
              <div className="results-grid">
                
                {/* CARD 1: IMC */}
                <div className="result-card" style={{borderLeftColor: '#6C5CE7'}}>
                  <h3>IMC (Massa Corporal)</h3>
-                 <div className="result-value">{results.imc}</div>
-                 <span className={`result-status ${results.imcStatus === 'Normal' ? 'status-good' : 'status-alert'}`}>
-                   {results.imcStatus}
-                 </span>
+                 <div className="result-value">22.85</div>
+                 <span className="result-status status-good">Normal</span>
                </div>
 
                {/* CARD 2: ICA */}
                <div className="result-card" style={{borderLeftColor: '#00cec9'}}>
                  <h3>ICA (Cintura/Altura)</h3>
-                 <div className="result-value">{results.ica}</div>
-                 <span className={`result-status ${results.icaStatus === 'Saudável' ? 'status-good' : 'status-alert'}`}>
-                   {results.icaStatus}
-                 </span>
+                 <div className="result-value">0.45</div>
+                 <span className="result-status status-good">Saudável</span>
                  <p style={{fontSize:'0.75rem', marginTop:'5px', color:'#b2bec3'}}>Meta: Abaixo de 0.50</p>
                </div>
 
                {/* CARD 3: RCQ */}
                <div className="result-card" style={{borderLeftColor: '#FF7675'}}>
                  <h3>RCQ (Cintura/Quadril)</h3>
-                 <div className="result-value">{results.rcq}</div>
-                 <span className={`result-status ${results.rcqStatus.includes('Baixo') ? 'status-good' : 'status-alert'}`}>
-                   {results.rcqStatus}
-                 </span>
+                 <div className="result-value">0.80</div>
+                 <span className="result-status status-good">Risco Baixo</span>
                </div>
 
              </div>
-           ) : (
-             <p>Preencha todas as medidas para ver os cálculos.</p>
-           )}
         </div>
       </div>
     );
