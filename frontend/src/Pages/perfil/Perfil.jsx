@@ -29,9 +29,6 @@ export default function Perfil() {
   const [wizardStep, setWizardStep] = useState(1);
   const [isEditingMedidas, setIsEditingMedidas] = useState(false);
 
-<<<<<<< HEAD
-  // --- NAVEGAÇÃO ---
-=======
  
   const [medidas, setMedidas] = useState({
     altura: '',   
@@ -51,7 +48,6 @@ export default function Perfil() {
   };
 
   // --- LÓGICA DE NAVEGAÇÃO ---
->>>>>>> 0ab0489bc2846179ed9fca72acf725b36a2bf992
 
   const handleClickMedidasMenu = () => {
     // Redireciona sempre para o Wizard para demonstração
@@ -71,8 +67,6 @@ export default function Perfil() {
     setView('medidas_resumo'); 
   };
 
-<<<<<<< HEAD
-=======
   // --- FUNÇÕES DE CÁLCULO ---
 
   const calcularIndicadores = () => {
@@ -111,7 +105,6 @@ export default function Perfil() {
     return { imc, imcStatus, ica, icaStatus, rcq, rcqStatus };
   };
 
->>>>>>> 0ab0489bc2846179ed9fca72acf725b36a2bf992
   // --- RENDERIZAÇÃO DAS TELAS ---
 
   const renderMenu = () => (
@@ -145,17 +138,10 @@ export default function Perfil() {
       </header>
 
       <div className="form-container">
-<<<<<<< HEAD
-        <input className="input-field" name="nome" placeholder="Nome Completo" />
-        <input className="input-field" name="email" placeholder="Email" />
-        <input className="input-field" name="genero" placeholder="Gênero" />
-        <input className="input-field" name="senha" type="password" placeholder="Senha" />
-=======
         <input className="input-field" name="nome" placeholder="Nome Completo" value={userOn?.nome || ''} onChange={handleChangeUser} />
         <input className="input-field" name="email" placeholder="Email" value={userOn?.email || ''} onChange={handleChangeUser} />
         <input className="input-field" name="genero" placeholder="Gênero" value={userOn?.genero || ''} onChange={handleChangeUser} />
         <input className="input-field" name="senha" type="password" placeholder="Senha" value={userOn?.senha || ''} onChange={handleChangeUser} />
->>>>>>> 0ab0489bc2846179ed9fca72acf725b36a2bf992
 
         <div className="action-buttons">
           <button className="btn-edit">Editar dados</button>
