@@ -24,6 +24,10 @@ export const IconsRoxa = {
   // Caso precise de um ícone de status roxo
   Status: () => (
     <img src="./icons/statistic-r.png" className='icon-burguer-r' alt="Status" />
+  ),
+
+  Adm: () => (
+    <img src="./icons/image-16.png" className='icon-burguer-r' alt="Status" />
   )
 };
 
@@ -64,6 +68,10 @@ export const IconsBranca = {
 // Ícone solto (Gatilho do Menu)
 const MenuIcon = () => (
   <img src="./icons/lista.png" className='icon-lista' alt="Menu" />
+);
+
+const AdmIcon = () => (
+  <img src="./icons/image-16.png" className='icon-lista' alt="Menu" />
 );
 
 
@@ -118,6 +126,10 @@ export default function Burguer() {
 
         <button className="side-item" onClick={() => handleNavigate('/Estatistica')}>
           <IconsRoxa.Status /> Estatisticas
+        </button>
+
+        <button className="side-item" onClick={() => handleNavigate('/ControleAdm')}>
+          <IconsRoxa.Adm /> ADM
         </button>
       </div>
     </>

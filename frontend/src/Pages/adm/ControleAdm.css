@@ -1,0 +1,139 @@
+/* =========================================
+   CONTROLE ADM - ESTILOS GERAIS
+   ========================================= */
+
+/* --- Container dos Botões do Menu (Para dar espaço entre eles) --- */
+.menu-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaço vertical entre os botões grandes */
+  margin-top: 20px;
+}
+
+/* --- Botões do Menu ADM (Gradientes) --- */
+.adm-card {
+  /* Gradiente Rosa para Roxo igual ao print */
+  background: linear-gradient(135deg, #FF7675 0%, #6C5CE7 100%);
+  border-radius: 25px; /* Bordas bem arredondadas */
+  padding: 35px 20px;  /* Mais espaço interno */
+  
+  /* Layout do conteúdo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* Texto e Sombra */
+  color: white;
+  box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4); /* Sombra suave roxa */
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.adm-card:active {
+  transform: scale(0.97); /* Efeito de clique */
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.adm-card h3 {
+  margin-top: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* Garante que os ícones SVG fiquem brancos */
+.adm-card svg {
+  stroke: white;
+  width: 48px;
+  height: 48px;
+}
+
+
+/* =========================================
+   LISTA DE MISSÕES
+   ========================================= */
+
+.missions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaço entre os cards de missão */
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.mission-card {
+  background-color: #F0F0F5; /* Cinza bem claro conforme o print */
+  border: 1px solid #E6E6EA;
+  border-radius: 16px;
+  padding: 16px;
+  position: relative;
+}
+
+/* Linha do topo: Título + Badge XP */
+.mission-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinha no topo caso o título seja grande */
+  margin-bottom: 6px;
+}
+
+.mission-title {
+  font-size: 0.95rem;
+  font-weight: 800; /* Negrito forte */
+  color: #2D3436; /* Cinza escuro quase preto */
+  margin: 0;
+  line-height: 1.2;
+}
+
+.xp-badge {
+  background-color: #6C5CE7; /* Roxo */
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px; /* Badge estilo pílula */
+  white-space: nowrap; /* Não quebra linha */
+  margin-left: 10px;
+}
+
+.mission-desc {
+  font-size: 0.75rem;
+  color: #636e72; /* Cinza médio */
+  margin-bottom: 12px;
+  display: block;
+  line-height: 1.4;
+}
+
+/* Barra cinza (track) */
+.progress-bar {
+  width: 100%;
+  height: 8px; /* Altura da barra */
+  background-color: #B2BEC3; /* Cinza do print */
+  border-radius: 10px; /* Pontas redondas */
+  margin-bottom: 8px;
+}
+
+.mission-footer {
+  font-size: 0.75rem;
+  color: #636e72;
+  font-weight: 500;
+}
+
+/* Link "Clique aqui" no rodapé */
+.text-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #636e72;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.text-link strong {
+  color: #2D3436; /* Parte negrito mais escura */
+}

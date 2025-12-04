@@ -1,233 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* =========================================
+   RANKING GLOBAL - ESTILOS
+   ========================================= */
 
-:root {
-  --primary: #6C63FF;
-  --bg-gradient: linear-gradient(160deg, #e0c3fc 0%, #8ec5fc 100%);
-  --emerald-highlight: #d7ffb8; /* Cor de destaque para o 1º lugar */
-  --text-dark: #333;
-}
-
-* { box-sizing: border-box; }
-
+/* Gradiente de fundo roxo suave, igual ao resto do app */
 .ranking-container {
-  background: var(--bg-gradient);
   min-height: 100vh;
-  padding: 20px 15px;
-  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F4F4F8 50%, #C7C3FC 100%);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
+  position: relative; /* Para a ilustração no fundo */
   overflow-x: hidden;
 }
 
-/* --- Botão Menu no Topo --- */
-.header-top {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-}
-
-/* =========================================
-   ESTILOS DO MENU LATERAL (MANTIDOS)
-   ========================================= */
-.menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 900; opacity: 0; visibility: hidden; transition: 0.3s; }
-.menu-overlay.open { opacity: 1; visibility: visible; }
-.side-menu { position: fixed; top: 0; left: -280px; width: 280px; height: 100vh; background: #ffffff; box-shadow: 2px 0 15px rgba(0,0,0,0.2); z-index: 1000; padding: 20px; transition: left 0.3s ease-in-out; border-top-right-radius: 20px; border-bottom-right-radius: 20px; display: flex; flex-direction: column; gap: 10px; }
-.side-menu.open { left: 0; }
-.side-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-.side-title { font-size: 20px; color: var(--primary); margin: 0; }
-.btn-close { background: none; border: none; font-size: 28px; color: #888; cursor: pointer; }
-.side-item { display: flex; align-items: center; gap: 15px; background: transparent; border: none; width: 100%; padding: 12px 15px; font-size: 16px; color: #555; font-weight: 500; cursor: pointer; border-radius: 12px; transition: 0.2s; text-align: left; }
-.side-item:hover, .side-item.active { background: #f0f0ff; color: var(--primary); }
-.icon-burguer-r { width: 24px; height: 24px; object-fit: contain; }
-
-/* =========================================
-   NOVO CABEÇALHO DA LIGA (ATUALIZADO PARA IMAGENS)
-   ========================================= */
-.league-header {
+/* --- HEADER E TÍTULO --- */
+.perfil-header-back {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 25px;
-  text-align: center;
-  color: #fff;
-}
-
-/* Linha de ícones (agora alinha imagens) */
-.leagues-row {
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    gap: 15px; /* Espaço entre os escudos */
-    margin-bottom: 10px;
-    height: 90px; /* Altura fixa para evitar pulos no layout */
-}
-
-/* Reset da classe base das imagens */
-.league-icon {
-    /* Removemos clip-path e background pois agora são PNGs transparentes */
-    object-fit: contain;
-    transition: all 0.3s ease;
-}
-
-/* ESTILO DA PATENTE ATUAL (CENTRAL) */
-.league-icon.active-main {
-    width: 85px; /* Tamanho Grande */
-    height: auto;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); /* Brilho branco ao redor */
-    transform: scale(1.05);
-    z-index: 2; /* Fica por cima das outras se sobrepor */
-}
-
-/* ESTILO DAS PATENTES VIZINHAS (ANTERIOR/PRÓXIMA) */
-.league-icon.secondary {
-    width: 50px; /* Tamanho Menor */
-    height: auto;
-    opacity: 0.6; /* Meio transparente */
-    filter: grayscale(40%); /* Um pouco desbotado */
-    z-index: 1;
-}
-
-.league-title {
-  font-size: 26px;
-  font-weight: 800;
-  margin: 5px 0;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  letter-spacing: 0.5px;
-}
-
-.league-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.95);
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-.league-timer {
-    font-size: 14px;
-    font-weight: 700;
-    color: #FFD700; /* Dourado */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    margin-top: 5px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 4px 12px;
-    border-radius: 12px;
-}
-
-/* =========================================
-   RANKING LIST (MANTIDA)
-   ========================================= */
-.ranking-list {
+  justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ranking-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 12px 15px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
   position: relative;
-  transition: transform 0.2s;
 }
 
-/* Estilo Especial para o 1º Lugar */
-.ranking-card.rank-1 {
-    background-color: var(--emerald-highlight);
-    border: 1px solid #bceac8;
-}
-
-/* Estilo para "Você" */
-.ranking-card.me {
-  border: 2px solid var(--primary);
-}
-.ranking-card.me.rank-1 {
-    border: 2px solid var(--primary);
-    background-color: var(--emerald-highlight);
-}
-
-/* Posição (Círculo) */
-.rank-position {
-  font-size: 16px;
-  font-weight: 700;
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
+/* Seta de voltar (ArrowLeft) */
+.btn-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eee;
-  border-radius: 50%;
-  margin-right: 12px;
-  color: #666;
 }
 
-/* Cores do Pódio */
-.ranking-card:nth-child(1) .rank-position { background: transparent; color: #006400; font-size: 18px; }
-.ranking-card:nth-child(2) .rank-position { background: #C0C0C0; color: #fff; }
-.ranking-card:nth-child(3) .rank-position { background: #CD7F32; color: #fff; }
-
-/* Avatar */
-.rank-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 15px;
-    border: 2px solid #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.rank-info {
+.ranking-titles {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.rank-name {
-    font-weight: 700;
-    color: var(--text-dark);
-    font-size: 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 130px;
+.title-ranking {
+  font-size: 2rem;
+  font-weight: 800; /* Negrito forte */
+  color: #6C5CE7; /* Roxo principal */
+  margin: 0;
+  line-height: 1.2;
 }
 
-.ranking-card.rank-1 .rank-name {
-    color: #004d00;
+.subtitle-ranking {
+  font-size: 0.9rem;
+  color: #6C5CE7;
+  margin-top: 5px;
 }
 
-.rank-points { font-size: 13px; color: #666; font-weight: 600; }
 
-.rank-reward {
-    font-size: 24px;
-    margin-left: auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+/* --- LISTA DE RANKING --- */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  z-index: 2; /* Fica acima da ilustração */
 }
 
-/* Botão Voltar */
-.btn-voltar {
-  margin-top: 30px;
-  background: linear-gradient(90deg, #6C63FF 0%, #4facfe 100%);
-  border: none;
-  border-radius: 30px;
-  padding: 12px 40px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
-  width: auto;
-  transition: transform 0.2s;
+.ranking-row {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 118, 117, 0.15); /* Rosa claro transparente (#FF7675) */
+  border: 2px solid #FF7675; /* Borda rosa */
+  border-radius: 15px;
+  padding: 15px 20px;
+  width: 100%;
 }
-.btn-voltar:active {
-    transform: scale(0.95);
+
+/* Número da posição */
+.rank-pos-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #FF7675; /* Número rosa */
+  margin-right: 25px;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Nome do usuário */
+.rank-user-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FF7675; /* Nome rosa */
+}
+
+/* --- ILUSTRAÇÃO DO FUNDO --- */
+.ranking-illustration {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente */
+  width: 100%;
+  max-width: 400px; /* Limita o tamanho em telas grandes */
+  pointer-events: none; /* Permite clicar através dela */
+  z-index: 1; /* Fica atrás da lista */
+}
+
+/* --- Ícone da Seta SVG --- */
+.btn-back svg {
+    stroke: #6C5CE7;
+    width: 24px;
+    height: 24px;
 }
