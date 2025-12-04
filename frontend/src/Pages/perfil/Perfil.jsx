@@ -29,7 +29,29 @@ export default function Perfil() {
   const [wizardStep, setWizardStep] = useState(1);
   const [isEditingMedidas, setIsEditingMedidas] = useState(false);
 
+<<<<<<< HEAD
   // --- NAVEGAÇÃO ---
+=======
+ 
+  const [medidas, setMedidas] = useState({
+    altura: '',   
+    peso: '',     
+    abdomen: '',  
+    quadril: ''  
+  });
+
+  const handleChangeUser = (e) => {
+    if (userOn) {
+      setUserOn({ ...userOn, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleChangeMedidas = (e) => {
+    setMedidas({ ...medidas, [e.target.name]: e.target.value });
+  };
+
+  // --- LÓGICA DE NAVEGAÇÃO ---
+>>>>>>> 0ab0489bc2846179ed9fca72acf725b36a2bf992
 
   const handleClickMedidasMenu = () => {
     // Redireciona sempre para o Wizard para demonstração
@@ -49,6 +71,47 @@ export default function Perfil() {
     setView('medidas_resumo'); 
   };
 
+<<<<<<< HEAD
+=======
+  // --- FUNÇÕES DE CÁLCULO ---
+
+  const calcularIndicadores = () => {
+    const altura = parseFloat(medidas.altura.replace(',', '.'));
+    const peso = parseFloat(medidas.peso);
+    const abdomen = parseFloat(medidas.abdomen);
+    const quadril = parseFloat(medidas.quadril);
+
+    if (!altura || !peso) return null;
+
+    // 1. IMC = Peso / Altura²
+    const imc = (peso / (altura * altura)).toFixed(2);
+    let imcStatus = "Normal";
+    if (imc < 18.5) imcStatus = "Abaixo do peso";
+    else if (imc >= 25 && imc < 30) imcStatus = "Sobrepeso";
+    else if (imc >= 30) imcStatus = "Obesidade";
+
+    // 2. ICA = Cintura (cm) / Altura (cm) 
+    // Como altura está em metros, multiplicamos por 100, ou dividimos cintura por 100
+    // Fórmula: Cintura(m) / Altura(m)
+    const ica = ((abdomen / 100) / altura).toFixed(2);
+    const icaStatus = ica < 0.5 ? "Saudável" : "Risco Aumentado";
+
+    // 3. RCQ = Cintura / Quadril
+    let rcq = "N/A";
+    let rcqStatus = "Dados incompletos";
+    
+    if (abdomen && quadril) {
+        rcq = (abdomen / quadril).toFixed(2);
+        // Valor de referência genérico (0.85 mulheres / 0.90 homens)
+        // Usando uma média simples para visualização se não soubermos gênero
+        const limite = userOn?.genero?.toLowerCase().includes('fem') ? 0.85 : 0.90;
+        rcqStatus = rcq < limite ? "Risco Baixo" : "Risco Elevado";
+    }
+
+    return { imc, imcStatus, ica, icaStatus, rcq, rcqStatus };
+  };
+
+>>>>>>> 0ab0489bc2846179ed9fca72acf725b36a2bf992
   // --- RENDERIZAÇÃO DAS TELAS ---
 
   const renderMenu = () => (
@@ -82,10 +145,17 @@ export default function Perfil() {
       </header>
 
       <div className="form-container">
+<<<<<<< HEAD
         <input className="input-field" name="nome" placeholder="Nome Completo" />
         <input className="input-field" name="email" placeholder="Email" />
         <input className="input-field" name="genero" placeholder="Gênero" />
         <input className="input-field" name="senha" type="password" placeholder="Senha" />
+=======
+        <input className="input-field" name="nome" placeholder="Nome Completo" value={userOn?.nome || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="email" placeholder="Email" value={userOn?.email || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="genero" placeholder="Gênero" value={userOn?.genero || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="senha" type="password" placeholder="Senha" value={userOn?.senha || ''} onChange={handleChangeUser} />
+>>>>>>> 0ab0489bc2846179ed9fca72acf725b36a2bf992
 
         <div className="action-buttons">
           <button className="btn-edit">Editar dados</button>
