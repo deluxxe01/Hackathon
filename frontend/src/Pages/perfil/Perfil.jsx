@@ -30,16 +30,18 @@ export default function Perfil() {
   const [wizardStep, setWizardStep] = useState(1);
   const [isEditingMedidas, setIsEditingMedidas] = useState(false);
 
-  // ADICIONADO: Campo 'quadril' no estado
+ 
   const [medidas, setMedidas] = useState({
-    altura: '',   // em metros (ex: 1.70)
-    peso: '',     // em kg
-    abdomen: '',  // em cm
-    quadril: ''   // em cm (Necessário para o RCQ)
+    altura: '',   
+    peso: '',     
+    abdomen: '',  
+    quadril: ''  
   });
 
   const handleChangeUser = (e) => {
-    setUserOn({ ...userOn, [e.target.name]: e.target.value });
+    if (userOn) {
+      setUserOn({ ...userOn, [e.target.name]: e.target.value });
+    }
   };
 
   const handleChangeMedidas = (e) => {
@@ -111,7 +113,7 @@ export default function Perfil() {
         rcq = (abdomen / quadril).toFixed(2);
         // Valor de referência genérico (0.85 mulheres / 0.90 homens)
         // Usando uma média simples para visualização se não soubermos gênero
-        const limite = userOn.genero?.toLowerCase().includes('fem') ? 0.85 : 0.90;
+        const limite = userOn?.genero?.toLowerCase().includes('fem') ? 0.85 : 0.90;
         rcqStatus = rcq < limite ? "Risco Baixo" : "Risco Elevado";
     }
 
@@ -151,10 +153,10 @@ export default function Perfil() {
       </header>
 
       <div className="form-container">
-        <input className="input-field" name="nome" placeholder="Nome Completo" value={userOn.nome || ''} onChange={handleChangeUser} />
-        <input className="input-field" name="email" placeholder="Email" value={userOn.email || ''} onChange={handleChangeUser} />
-        <input className="input-field" name="genero" placeholder="Gênero" value={userOn.genero || ''} onChange={handleChangeUser} />
-        <input className="input-field" name="senha" type="password" placeholder="Senha" value={userOn.senha || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="nome" placeholder="Nome Completo" value={userOn?.nome || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="email" placeholder="Email" value={userOn?.email || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="genero" placeholder="Gênero" value={userOn?.genero || ''} onChange={handleChangeUser} />
+        <input className="input-field" name="senha" type="password" placeholder="Senha" value={userOn?.senha || ''} onChange={handleChangeUser} />
 
         <div className="action-buttons">
           <button className="btn-edit">Editar dados</button>
