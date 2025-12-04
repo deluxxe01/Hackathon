@@ -1,113 +1,256 @@
-/* =========================================
-   RANKING GLOBAL - ESTILOS
-   ========================================= */
-
-/* Gradiente de fundo roxo suave, igual ao resto do app */
+/* --- CONTAINER GERAL --- */
 .ranking-container {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F4F4F8 50%, #C7C3FC 100%);
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  position: relative; /* Para a ilustração no fundo */
-  overflow-x: hidden;
+  height: 100vh;
+  background-color: #f0f3ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
-/* --- HEADER E TÍTULO --- */
-.perfil-header-back {
+.ranking-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-  position: relative;
+  padding: 20px 20px 10px 20px;
+  background-color: transparent;
+  z-index: 10;
 }
 
-/* Seta de voltar (ArrowLeft) */
 .btn-back {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 5px;
 }
 
-.ranking-titles {
+.ranking-content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 20px 40px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+/* --- TÍTULOS --- */
+.ranking-title-area {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-.title-ranking {
-  font-size: 2rem;
-  font-weight: 800; /* Negrito forte */
-  color: #6C5CE7; /* Roxo principal */
-  margin: 0;
-  line-height: 1.2;
-}
-
-.subtitle-ranking {
-  font-size: 0.9rem;
+.ranking-title {
   color: #6C5CE7;
-  margin-top: 5px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
 }
 
+.ranking-subtitle {
+  color: #6C5CE7;
+  font-size: 0.9rem;
+  margin: 5px 0 15px 0;
+}
 
-/* --- LISTA DE RANKING --- */
+.btn-action-outline {
+  background: #fff;
+  border: 2px solid #6C5CE7; /* Borda mais grossa no botão Ligas também */
+  color: #6C5CE7;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(108, 92, 231, 0.2);
+}
+
+.patente-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.btn-icon-small {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* --- RANKING LIST --- */
 .ranking-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  z-index: 2; /* Fica acima da ilustração */
+  gap: 12px;
 }
 
-.ranking-row {
+.ranking-card {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 118, 117, 0.15); /* Rosa claro transparente (#FF7675) */
-  border: 2px solid #FF7675; /* Borda rosa */
-  border-radius: 15px;
-  padding: 15px 20px;
-  width: 100%;
+  background: #fff;
+  border: 2px solid #ffcccc;
+  border-radius: 12px;
+  padding: 15px;
+  color: #ff6b81;
+  font-weight: bold;
 }
 
-/* Número da posição */
-.rank-pos-number {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #FF7675; /* Número rosa */
-  margin-right: 25px;
-  min-width: 30px;
+.ranking-card.highlight {
+  background-color: #ffdce0;
+  border-color: #ff6b81;
+}
+
+.rank-pos {
+  font-size: 1.2rem;
+  width: 30px;
   text-align: center;
+  margin-right: 10px;
 }
 
-/* Nome do usuário */
-.rank-user-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #FF7675; /* Nome rosa */
+.ranking-footer-img {
+  margin-top: auto;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.ranking-footer-img img {
+    max-width: 100%;
 }
 
-/* --- ILUSTRAÇÃO DO FUNDO --- */
-.ranking-illustration {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%); /* Centraliza horizontalmente */
-  width: 100%;
-  max-width: 400px; /* Limita o tamanho em telas grandes */
-  pointer-events: none; /* Permite clicar através dela */
-  z-index: 1; /* Fica atrás da lista */
+/* --- PATENTES LIST --- */
+.patentes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 20px;
 }
 
-/* --- Ícone da Seta SVG --- */
-.btn-back svg {
-    stroke: #6C5CE7;
-    width: 24px;
-    height: 24px;
+.patente-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    /* A borda é definida inline ou via classe, mas o radius precisa estar aqui */
+    border-radius: 10px; 
+    border: 2px solid #ccc; /* Fallback */
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.patente-icon-box {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.patente-icon-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Efeito Gradiente no Texto (Opala) */
+.text-gradient-opala {
+  background: linear-gradient(90deg, #00b894, #a29bfe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+}
+
+/* --- LIGAS LIST --- */
+.ligas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.liga-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    min-height: 100px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.liga-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.liga-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.liga-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+/* Animações */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- PATENTES LIST --- */
+.patente-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* XP NA DIREITA */
+    background-color: #fff;
+    border-radius: 10px; 
+    border: 2px solid #ccc;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.patente-left-group {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* espaço entre ícone e nome */
+}
+
+/* XP sempre alinhado à direita */
+.card-requirement {
+    margin-left: auto;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+
+/* --- LIGAS LIST (XP alinhado à direita também) --- */
+.liga-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* XP NA DIREITA */
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    min-height: 100px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.liga-left-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-requirement.lg-text {
+    font-size: 1rem;
+    margin-left: auto; /* garante ficar à direita */
 }
